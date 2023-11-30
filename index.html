@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Uploader</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,16 +13,16 @@
             <p>Drag files here or click to upload</p>
             <input type="file" id="file-input" hidden />
         </div>
-        <div id="file-stats">
-            <div id="upload-progress">Progress: 0%</div>
-            <div id="file-size">Size: 0MB</div>
-            <div id="upload-speed-graph">
-                <!-- Speedometer graph will be implemented here -->
-            </div>
-        </div>
+        <!-- Added file information display area -->
+        <div id="file-info" style="margin-top: 10px;"> <!-- File information will be displayed here --></div>
+        <!-- Add other elements of your page as needed -->
     </div>
+	<div class="chart-container">
+		<canvas id="speedChart"></canvas>
+	</div>
+    <!-- Your other body content here -->
 
-    <!-- JavaScript for handling the upload and stats -->
-    <script src="upload.js"></script>
+    <!-- Include your JavaScript files -->
+    <script src="js/upload.js"></script>
 </body>
 </html>
