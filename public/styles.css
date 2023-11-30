@@ -1,35 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Nunito', sans-serif;
+    background-color: #00796B; /* Deep turquoise/teal background */
     margin: 0;
     padding: 20px;
-    color: #333;
-}
-
-.uploader-container {
-    max-width: 600px;
-    margin: auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #F5F5F5; /* Light grey for better readability */
 }
 
 /* Drag-Drop Area */
 #drag-drop-area {
-    border: 2px dashed #ccc;
+    border: 2px dashed #FFEB3B; /* Sunny yellow border */
     border-radius: 5px;
     padding: 20px;
     text-align: center;
-    background-color: #f8f8f8;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
     cursor: pointer;
-    margin-bottom: 20px;
+    width: calc(100% - 40px);
+    margin: 10px auto;
+    box-sizing: border-box;
 }
 
-#drag-drop-area:hover {
-    background-color: #e9e9e9;
-    transition: background-color 0.3s ease;
+#drag-drop-area:hover, #drag-drop-area.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: #FF7043; /* Coral for hover state */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* File Input and Labels */
@@ -40,14 +36,57 @@ input[type='file'] {
 .custom-file-label {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #007bff; /* Blue */
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
 }
 
 .custom-file-label:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* File Info and Upload Button Container */
+.file-info-upload-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* File Info Styling */
+#file-info {
+    font-size: 14px;
+    color: #555;
+    flex-grow: 1;
+}
+
+/* Upload Button Styling */
+#upload-button {
+    background: #FF7043; /* Coral background */
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-grow: 0;
+}
+
+#upload-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+#upload-button:hover:enabled {
+    background: #FF5722; /* Darker coral for hover */
+    box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+    transform: translateY(-2px);
 }
 
 /* File Statistics */
@@ -60,39 +99,42 @@ input[type='file'] {
 }
 
 /* Progress Bar */
-#upload-progress {
-    width: 100%;
-    background-color: #a84747;
+#upload-progress, .progress-bar {
     border-radius: 5px;
-    margin-bottom: 20px;
 }
 
 .progress-bar {
     height: 20px;
     background-color: #4caf50;
-    border-radius: 5px;
     width: 0%;
+    transition: width 0.4s ease-in-out;
 }
 
-/* #upload-button {
-    position: absolute;
-    right: 0;
-    bottom: -60px; /* Adjust as needed */
-} */
-
+/* SpeedChart Styles */
 #speedChart {
-    /* Your existing styles for the speedChart */
+    /* Add styles for SpeedChart if needed */
 }
-
 
 /* Responsive Design */
 @media (max-width: 600px) {
-    .uploader-container {
-		position: relative;
+    #drag-drop-area {
         padding: 10px;
     }
 
-    #drag-drop-area {
-        padding: 10px;
+    .file-info-upload-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #file-info {
+        order: 2;
+        margin-bottom: 10px;
+    }
+
+    #upload-button {
+        order: 1;
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 10px;
     }
 }

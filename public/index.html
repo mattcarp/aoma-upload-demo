@@ -18,10 +18,13 @@
 			<p>Drag files here or click to select</p>
 			<input type="file" id="file-input" hidden />
 		</div>
-		<!-- Added file information display area -->
-		<div id="file-info" style="margin-top: 10px;"> <!-- File information will be displayed here --></div>
-		<!-- Add other elements of your page as needed -->
-		<button id="upload-button">Upload</button>
+		<div class="file-info-upload-container">
+
+			<!-- Added file information display area -->
+			<div id="file-info" style="margin-top: 10px;"> <!-- File information will be displayed here --></div>
+			<!-- Add other elements of your page as needed -->
+			<button id="upload-button" disabled>Upload</button>
+		</div>
 		<div class="chart-container">
 			<canvas id="speedChart"></canvas>
 		</div>

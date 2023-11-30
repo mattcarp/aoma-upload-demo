@@ -27,13 +27,11 @@ async function uploadFile() {
 	})
 	.then(response => {
 			if (response.ok) {
-					return response.text();
+					console.log('File uploaded successfully');
+					resetUploadButton();
 			} else {
 					throw new Error(`Server responded with status: ${response.status}`);
 			}
-	})
-	.then(data => {
-			console.log('File uploaded successfully:', data);
 	})
 	.catch(error => {
 			console.error('Error uploading file:', error);
@@ -41,77 +39,84 @@ async function uploadFile() {
 }
 
 let dragDropArea;
-let fileInfoDisplay; // Declare fileInfoDisplay in global scope
-
-function calculateSpeed(bytes, seconds) {
-return bytes / seconds;
-}
+let fileInfoDisplay;
 
 function handleDragOver(e) {
-e.preventDefault();
-dragDropArea.classList.add("active");
+	e.preventDefault();
+	dragDropArea.classList.add("active");
 }
 
 function handleFileDrop(e) {
-e.preventDefault();
-const files = e.dataTransfer.files;
-displayFileInfo(files[0]);
-resetDragDropArea();
+	e.preventDefault();
+	const files = e.dataTransfer.files;
+	displayFileInfo(files[0]);
+	resetDragDropArea();
 }
 
 function resetDragDropArea() {
-dragDropArea.classList.remove("active");
+	dragDropArea.classList.remove("active");
 }
 
 function handleFileSelect(e) {
-const file = e.target.files[0];
-displayFileInfo(file);
+	const file = e.target.files[0];
+	displayFileInfo(file);
+	document.getElementById('upload-button').disabled = !file; // Enable button only if file is selected
 }
 
 function displayFileInfo(file) {
-if (file) {
-	fileInfoDisplay.textContent = `Selected file: ${file.name}`;
-}
+	if (file) {
+			fileInfoDisplay.textContent = `Selected file: ${file.name}`;
+	} else {
+			fileInfoDisplay.textContent = ''; // Clear the text if no file is selected
+	}
 }
 
 function triggerFileSelect() {
-document.getElementById("file-input").click();
+	document.getElementById("file-input").click();
+}
+
+function resetUploadButton() {
+	const uploadButton = document.getElementById('upload-button');
+	uploadButton.disabled = true; // Disable the button after upload or if no file is selected
+	fileInfoDisplay.textContent = ''; // Clear the file info text
+	document.getElementById('file-input').value = ''; // Clear the file input
 }
 
 window.onload = function () {
-dragDropArea = document.getElementById("drag-drop-area");
-const fileInput = document.getElementById("file-input");
-fileInfoDisplay = document.getElementById("file-info"); // Initialize fileInfoDisplay
-const uploadButton = document.getElementById("upload-button");
-uploadButton.addEventListener("click", uploadFile);
+	dragDropArea = document.getElementById("drag-drop-area");
+	const fileInput = document.getElementById("file-input");
+	fileInfoDisplay = document.getElementById("file-info");
+	const uploadButton = document.getElementById("upload-button");
 
-dragDropArea.addEventListener("dragover", handleDragOver);
-dragDropArea.addEventListener("drop", handleFileDrop);
-dragDropArea.addEventListener("dragleave", resetDragDropArea);
-dragDropArea.addEventListener("click", triggerFileSelect); // Corrected
-fileInput.addEventListener("change", handleFileSelect);
+	dragDropArea.addEventListener("dragover", handleDragOver);
+	dragDropArea.addEventListener("drop", handleFileDrop);
+	dragDropArea.addEventListener("dragleave", resetDragDropArea);
+	dragDropArea.addEventListener("click", triggerFileSelect);
+	fileInput.addEventListener("change", handleFileSelect);
 
-// Chart Initialization
-var ctx = document.getElementById("speedChart").getContext("2d");
-var speedChart = new Chart(ctx, {
-	type: "line",
-	data: {
-		labels: [],
-		datasets: [
-			{
-				label: "Upload Speed",
-				backgroundColor: "rgba(255, 99, 132, 0.2)",
-				borderColor: "rgba(255, 99, 132, 1)",
-				data: [],
+	// Initialize the upload button as disabled
+	uploadButton.disabled = true;
+	uploadButton.addEventListener("click", uploadFile);
+
+	// Chart Initialization
+	var ctx = document.getElementById("speedChart").getContext("2d");
+	var speedChart = new Chart(ctx, {
+			type: "line",
+			data: {
+					labels: [],
+					datasets: [{
+							label: "Upload Speed",
+							backgroundColor: "rgba(255, 99, 132, 0.2)",
+							borderColor: "rgba(255, 99, 132, 1)",
+							data: [],
+					}],
 			},
-		],
-	},
-	options: {
-		scales: {
-			y: {
-				beginAtZero: true,
+			options: {
+					scales: {
+							y: {
+									beginAtZero: true,
+							},
+					},
 			},
-		},
-	},
-});
+	});
 };
