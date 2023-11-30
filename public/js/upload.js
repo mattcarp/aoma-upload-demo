@@ -17,7 +17,7 @@ async function uploadFile() {
 	}
 
 	const signedUrl = await getSignedUrl(file.name, file.type);
-
+	showAndUpdateChart();
 	fetch(signedUrl, {
 			method: 'PUT',
 			body: file,
@@ -57,6 +57,14 @@ function resetDragDropArea() {
 	dragDropArea.classList.remove("active");
 }
 
+function showAndUpdateChart() {
+	const speedChartElement = document.getElementById("speedChart");
+	speedChartElement.style.display = 'block'; // Make the chart visible
+
+	// Code to update the chart with real values goes here
+	// For example, you can update the chart data and then call `speedChart.update()`
+}
+
 function handleFileSelect(e) {
 	const file = e.target.files[0];
 	displayFileInfo(file);
@@ -87,6 +95,8 @@ window.onload = function () {
 	const fileInput = document.getElementById("file-input");
 	fileInfoDisplay = document.getElementById("file-info");
 	const uploadButton = document.getElementById("upload-button");
+	document.getElementById("speedChart").style.display = 'none';
+
 
 	dragDropArea.addEventListener("dragover", handleDragOver);
 	dragDropArea.addEventListener("drop", handleFileDrop);
