@@ -32,6 +32,12 @@ function displayFileInfo(file) {
     }
 }
 
+function triggerFileSelect() {
+    document.getElementById('file-input').click();
+	console.log('did something good happen?');
+}
+
+
 window.onload = function() {
     dragDropArea = document.getElementById('drag-drop-area');
     const fileInput = document.getElementById('file-input');
@@ -40,6 +46,7 @@ window.onload = function() {
     dragDropArea.addEventListener('dragover', handleDragOver);
     dragDropArea.addEventListener('drop', handleFileDrop);
     dragDropArea.addEventListener('dragleave', resetDragDropArea);
+    dragDropArea.addEventListener('click', triggerFileSelect); // Corrected
     fileInput.addEventListener('change', handleFileSelect);
 
     // Chart Initialization
