@@ -5,6 +5,31 @@ const app = express();
 
 console.log("hello from the server");
 
+const FastSpeedtest = require("fast-speedtest-api");
+
+let speedtest = new FastSpeedtest({
+  token: "YXNkZmFzZGxmbnNkYWZoYXNkZmhrYWxm", // Replace with the actual token
+  verbose: false, // Let's keep it simple
+  timeout: 10000, // 10 seconds should do
+  https: true, // Secure, as we like it
+  urlCount: 5, // Default magic number
+  bufferSize: 8, // Buffer size for the speedtest
+  unit: FastSpeedtest.UNITS.Mbps // Speed in Mbps, because we're civilized
+});
+
+speedtest.getSpeed().then(speed => {
+  console.log(`Your internet speed is: ${speed} Mbps. Lightning fast, isn't it?`);
+}).catch(e => {
+  console.error(`Error: ${e.message}. Maybe the hamsters powering your internet took a break.`);
+});
+
+function getInternetSpeed() {
+    return speedtest.getSpeed().then(speed => speed).catch(e => console.error(e.message));
+}
+
+module.exports = { getInternetSpeed };
+
+
 // Serve your static files (client-side)
 app.use(express.static('public'));
 
