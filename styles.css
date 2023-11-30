@@ -1,0 +1,59 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif; /* Example of a sans-serif font */
+}
+
+/* Full Viewport Layout */
+html, body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4; /* Muted background color */
+}
+
+/* File Uploader Container */
+.uploader-container {
+    width: 80%;
+    height: 80%;
+    border: 2px dashed #ccc; /* Dashed border for the drag-and-drop area */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Upload Button */
+.upload-btn {
+    background-color: #ddd; /* Muted button color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-btn:hover {
+    background-color: #bbb;
+}
+
+/* Progress Bar and Metrics */
+.progress-bar, .metrics {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .uploader-container {
+        width: 90%;
+        height: 90%;
+    }
+
+    /* Additional responsive styles can go here */
+}

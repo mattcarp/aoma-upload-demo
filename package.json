@@ -1,0 +1,12 @@
+{
+  "name": "uploader-design-mockup",
+  "version": "1.0.0",
+  "description": "## Introduction [Provide a brief introduction to your project here. Explain what the uploader does and its primary features.]",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
