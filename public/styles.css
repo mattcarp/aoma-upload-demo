@@ -62,7 +62,7 @@ input[type='file'] {
 /* Progress Bar */
 #upload-progress {
     width: 100%;
-    background-color: #e0e0e0;
+    background-color: #a84747;
     border-radius: 5px;
     margin-bottom: 20px;
 }
@@ -74,9 +74,21 @@ input[type='file'] {
     width: 0%;
 }
 
+/* #upload-button {
+    position: absolute;
+    right: 0;
+    bottom: -60px; /* Adjust as needed */
+} */
+
+#speedChart {
+    /* Your existing styles for the speedChart */
+}
+
+
 /* Responsive Design */
 @media (max-width: 600px) {
     .uploader-container {
+		position: relative;
         padding: 10px;
     }
 
