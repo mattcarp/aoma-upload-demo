@@ -32,6 +32,15 @@ input[type='file'] {
     display: none;
 }
 
+.speed-display {
+    font-size: 3em; /* Big and bold */
+    color: #ff4500; /* Let's make it pop */
+    text-align: center; /* Center stage */
+    padding: 20px; /* Comfortable space */
+    /* Add more styling as per your design theme */
+}
+
+
 .custom-file-label {
     display: inline-block;
     padding: 10px 20px;

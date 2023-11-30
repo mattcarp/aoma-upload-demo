@@ -4,18 +4,38 @@ let speedChart; // Declare speedChart globally
 
 async function getSignedUrl(filename, contentType) {
   try {
-    const response = await fetch(`http://localhost:3000/generate-signed-url?filename=${encodeURIComponent(filename)}&contentType=${encodeURIComponent(contentType)}`);
+    const response = await fetch(
+      `http://localhost:3000/generate-signed-url?filename=${encodeURIComponent(
+        filename
+      )}&contentType=${encodeURIComponent(contentType)}`
+    );
     if (response.ok) {
       const data = await response.json();
       return data.signedUrl;
     } else {
-      console.error('Server responded with an error:', response.status, response.statusText);
+      console.error(
+        "Server responded with an error:",
+        response.status,
+        response.statusText
+      );
       return null;
     }
   } catch (error) {
-    console.error('Failed to get signed URL:', error.message);
+    console.error("Failed to get signed URL:", error.message);
     return null;
   }
+}
+
+fetch("/api/speedtest")
+  .then((response) => response.json())
+  .then((data) => {
+    displaySpeed(data.speed);
+  })
+  .catch((error) => console.error("Error fetching the speed:", error));
+
+function displaySpeed(speed) {
+  const speedElement = document.getElementById("speedDisplay");
+  speedElement.textContent = `${speed} Mbps`;
 }
 
 function updateSpeedChart(chart, speed) {
@@ -45,18 +65,20 @@ async function uploadFile(file) {
 
   const startTime = new Date().getTime();
 
-  xhr.upload.onprogress = function(e) {
+  xhr.upload.onprogress = function (e) {
     if (e.lengthComputable) {
       const percentComplete = (e.loaded / e.total) * 100;
-      document.getElementById("uploadPercentage").innerText = percentComplete.toFixed(2) + "%";
+      document.getElementById("uploadPercentage").innerText =
+        percentComplete.toFixed(2) + "%";
 
       const speed = calculateSpeed(e.loaded, startTime);
-      document.getElementById("uploadSpeed").innerText = speed.toFixed(2) + " KB/s";
+      document.getElementById("uploadSpeed").innerText =
+        speed.toFixed(2) + " KB/s";
       updateSpeedChart(speedChart, speed);
     }
   };
 
-  xhr.onload = function() {
+  xhr.onload = function () {
     if (xhr.status === 200) {
       console.log("File uploaded successfully");
     } else {
@@ -64,7 +86,7 @@ async function uploadFile(file) {
     }
   };
 
-  xhr.onerror = function() {
+  xhr.onerror = function () {
     console.error("Error during the upload process.");
   };
 
@@ -146,13 +168,13 @@ window.onload = function () {
   dragDropArea.addEventListener("dragleave", resetDragDropArea);
 
   fileInfoDisplay = document.getElementById("file-info");
-  
+
   const fileInput = document.getElementById("file-input");
   fileInput.addEventListener("change", handleFileSelect);
 
   const uploadButton = document.getElementById("upload-button");
   uploadButton.disabled = true;
-  uploadButton.addEventListener("click", function() {
+  uploadButton.addEventListener("click", function () {
     uploadFile(fileInput.files[0]);
     document.getElementById("speedChart").style.display = "block"; // Show the chart when upload starts
   });

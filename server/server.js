@@ -29,6 +29,16 @@ function getInternetSpeed() {
 
 module.exports = { getInternetSpeed };
 
+// Define a route to fetch internet speed
+app.get('/api/speedtest', async (req, res) => {
+  try {
+      const speed = await getInternetSpeed();
+      res.json({ speed: speed });
+  } catch (error) {
+      res.status(500).json({ error: 'Error fetching internet speed' });
+  }
+});
+
 
 // Serve your static files (client-side)
 app.use(express.static('public'));
