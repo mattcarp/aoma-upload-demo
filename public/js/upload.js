@@ -36,13 +36,16 @@ async function uploadFile() {
 	const signedUrl = await getSignedUrl(file.name, file.type);
 	const xhr = new XMLHttpRequest();
 	const startTime = new Date().getTime();
-
 	xhr.upload.onprogress = function(event) {
-			if (event.lengthComputable) {
-					const speed = calculateSpeed(event.loaded, startTime); // Calculate speed
-					updateSpeedChart(speedChart, speed); // Update chart with the current speed
-			}
-	};
+		if (event.lengthComputable) {
+				const percentComplete = (event.loaded / event.total) * 100;
+				document.getElementById('uploadPercentage').innerText = `${percentComplete.toFixed(2)}%`;
+
+				const speed = calculateSpeed(event.loaded, startTime);
+				document.getElementById('uploadSpeed').innerText = `${speed.toFixed(2)} KB/s`;
+				updateSpeedChart(speedChart, speed);
+		}
+};
 
 	xhr.onreadystatechange = function() {
 			if (xhr.readyState === XMLHttpRequest.DONE) {

@@ -107,6 +107,13 @@ input[type='file'] {
     /* Adjust chart styles to fit the new color scheme */
 }
 
+#uploadStatus h2 {
+    font-size: 2em; /* Large font size */
+    text-align: center;
+    margin: 10px 0;
+}
+
+
 /* Responsive Design */
 @media (max-width: 600px) {
     #drag-drop-area {
