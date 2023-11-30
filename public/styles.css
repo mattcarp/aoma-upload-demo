@@ -113,6 +113,10 @@ input[type='file'] {
     margin: 10px 0;
 }
 
+#uploadPercentage, #uploadSpeed {
+    opacity: 0; /* Initially hidden */
+    transition: opacity 3s ease-in-out;
+}
 
 /* Responsive Design */
 @media (max-width: 600px) {
