@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Uploader</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="uploader-container">
+        <div id="drag-drop-area">
+            <p>Drag files here or click to upload</p>
+            <input type="file" id="file-input" hidden />
+        </div>
+        <div id="file-stats">
+            <div id="upload-progress">Progress: 0%</div>
+            <div id="file-size">Size: 0MB</div>
+            <div id="upload-speed-graph">
+                <!-- Speedometer graph will be implemented here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for handling the upload and stats -->
+    <script src="upload.js"></script>
+</body>
+</html>
