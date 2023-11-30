@@ -1,3 +1,7 @@
+let dragDropArea;
+let fileInfoDisplay;
+let speedChart; // Declare speedChart globally
+
 async function getSignedUrl(filename, contentType) {
 	const response = await fetch(`http://localhost:3000/generate-signed-url?filename=${encodeURIComponent(filename)}&contentType=${encodeURIComponent(contentType)}`);
 	if (response.ok) {
@@ -6,6 +10,19 @@ async function getSignedUrl(filename, contentType) {
 	} else {
 			throw new Error('Failed to get signed URL');
 	}
+}
+
+function updateSpeedChart(chart, speed) {
+	chart.data.labels.push(""); // Add empty label for each data point
+	chart.data.datasets.forEach((dataset) => {
+			dataset.data.push(speed);
+	});
+	chart.update();
+}
+
+function calculateSpeed(bytesUploaded, startTime) {
+	const duration = (new Date().getTime() - startTime) / 1000; // Time in seconds
+	return (bytesUploaded / duration) / 1024; // Speed in KB/s
 }
 
 async function uploadFile() {
@@ -17,29 +34,29 @@ async function uploadFile() {
 	}
 
 	const signedUrl = await getSignedUrl(file.name, file.type);
-	showAndUpdateChart();
-	fetch(signedUrl, {
-			method: 'PUT',
-			body: file,
-			headers: {
-					'Content-Type': file.type
+	const xhr = new XMLHttpRequest();
+	const startTime = new Date().getTime();
+
+	xhr.upload.onprogress = function(event) {
+			if (event.lengthComputable) {
+					const speed = calculateSpeed(event.loaded, startTime); // Calculate speed
+					updateSpeedChart(speedChart, speed); // Update chart with the current speed
 			}
-	})
-	.then(response => {
-			if (response.ok) {
-					console.log('File uploaded successfully');
+	};
+
+	xhr.onreadystatechange = function() {
+			if (xhr.readyState === XMLHttpRequest.DONE) {
+					console.log('Upload complete');
 					resetUploadButton();
-			} else {
-					throw new Error(`Server responded with status: ${response.status}`);
 			}
-	})
-	.catch(error => {
-			console.error('Error uploading file:', error);
-	});
+	};
+
+	xhr.open('PUT', signedUrl, true);
+	xhr.setRequestHeader('Content-Type', file.type);
+	xhr.send(file);
+	document.getElementById("speedChart").style.display = 'block'; // Show the chart
 }
 
-let dragDropArea;
-let fileInfoDisplay;
 
 function handleDragOver(e) {
 	e.preventDefault();
@@ -55,14 +72,6 @@ function handleFileDrop(e) {
 
 function resetDragDropArea() {
 	dragDropArea.classList.remove("active");
-}
-
-function showAndUpdateChart() {
-	const speedChartElement = document.getElementById("speedChart");
-	speedChartElement.style.display = 'block'; // Make the chart visible
-
-	// Code to update the chart with real values goes here
-	// For example, you can update the chart data and then call `speedChart.update()`
 }
 
 function handleFileSelect(e) {
@@ -97,25 +106,23 @@ window.onload = function () {
 	const uploadButton = document.getElementById("upload-button");
 	document.getElementById("speedChart").style.display = 'none';
 
-
 	dragDropArea.addEventListener("dragover", handleDragOver);
 	dragDropArea.addEventListener("drop", handleFileDrop);
 	dragDropArea.addEventListener("dragleave", resetDragDropArea);
 	dragDropArea.addEventListener("click", triggerFileSelect);
 	fileInput.addEventListener("change", handleFileSelect);
 
-	// Initialize the upload button as disabled
 	uploadButton.disabled = true;
 	uploadButton.addEventListener("click", uploadFile);
 
 	// Chart Initialization
 	var ctx = document.getElementById("speedChart").getContext("2d");
-	var speedChart = new Chart(ctx, {
+	speedChart = new Chart(ctx, {
 			type: "line",
 			data: {
 					labels: [],
 					datasets: [{
-							label: "Upload Speed",
+							label: "Upload Speed (KB/s)",
 							backgroundColor: "rgba(255, 99, 132, 0.2)",
 							borderColor: "rgba(255, 99, 132, 1)",
 							data: [],

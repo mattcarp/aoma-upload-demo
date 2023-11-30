@@ -3,19 +3,19 @@
 /* General Styles */
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #00796B; /* Deep turquoise/teal background */
+    background-color: #FFFFFF; /* White background */
     margin: 0;
     padding: 20px;
-    color: #F5F5F5; /* Light grey for better readability */
+    color: #000000; /* Black text */
 }
 
 /* Drag-Drop Area */
 #drag-drop-area {
-    border: 2px dashed #FFEB3B; /* Sunny yellow border */
+    border: 2px dashed #000000; /* Black dashed border */
     border-radius: 5px;
     padding: 20px;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    background-color: #FFFFFF; /* White background */
     cursor: pointer;
     width: calc(100% - 40px);
     margin: 10px auto;
@@ -23,9 +23,8 @@ body {
 }
 
 #drag-drop-area:hover, #drag-drop-area.active {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: #FF7043; /* Coral for hover state */
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    background-color: #F5F5F5; /* Light gray for hover */
+    border-color: #000000;
 }
 
 /* File Input and Labels */
@@ -36,14 +35,14 @@ input[type='file'] {
 .custom-file-label {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff; /* Blue */
-    color: #fff;
+    background-color: #000000; /* Black background */
+    color: #FFFFFF; /* White text */
     border-radius: 4px;
     cursor: pointer;
 }
 
 .custom-file-label:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #333333; /* Dark gray on hover */
 }
 
 /* File Info and Upload Button Container */
@@ -58,14 +57,14 @@ input[type='file'] {
 /* File Info Styling */
 #file-info {
     font-size: 14px;
-    color: #555;
+    color: #000000; /* Black text */
     flex-grow: 1;
 }
 
 /* Upload Button Styling */
 #upload-button {
-    background: #FF7043; /* Coral background */
-    color: white;
+    background: #000000; /* Black background */
+    color: #FFFFFF; /* White text */
     padding: 12px 24px;
     font-size: 16px;
     border: none;
@@ -77,16 +76,12 @@ input[type='file'] {
 }
 
 #upload-button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    box-shadow: none;
-    opacity: 0.7;
+    background: #CCCCCC; /* Light gray for disabled state */
+    color: #666666; /* Dark gray text for disabled state */
 }
 
 #upload-button:hover:enabled {
-    background: #FF5722; /* Darker coral for hover */
-    box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
-    transform: translateY(-2px);
+    background: #333333; /* Dark gray on hover */
 }
 
 /* File Statistics */
@@ -101,25 +96,15 @@ input[type='file'] {
 /* Progress Bar */
 #upload-progress, .progress-bar {
     border-radius: 5px;
-}
-
-.progress-bar {
     height: 20px;
-    background-color: #4caf50;
+    background-color: #000000; /* Black background for progress bar */
     width: 0%;
     transition: width 0.4s ease-in-out;
 }
 
 /* SpeedChart Styles */
 #speedChart {
-    /* Add styles for SpeedChart if needed */
-	display: none; /* Initially hidden */
-    animation: fadeIn 1s ease-in-out; /* Animation for fading in */
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    /* Adjust chart styles to fit the new color scheme */
 }
 
 /* Responsive Design */
