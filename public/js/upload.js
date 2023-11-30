@@ -19,7 +19,8 @@ async function getSignedUrl(filename, contentType) {
 }
 
 function updateSpeedChart(chart, speed) {
-  chart.data.labels.push(""); 
+  const currentTime = new Date().toLocaleTimeString();
+  chart.data.labels.push(currentTime);
   chart.data.datasets.forEach((dataset) => {
     dataset.data.push(speed);
   });
@@ -27,8 +28,8 @@ function updateSpeedChart(chart, speed) {
 }
 
 function calculateSpeed(bytesUploaded, startTime) {
-  const duration = (new Date().getTime() - startTime) / 1000; 
-  return bytesUploaded / duration / 1024; 
+  const duration = (new Date().getTime() - startTime) / 1000;
+  return bytesUploaded / duration / 1024;
 }
 
 async function uploadFile(file) {
@@ -42,15 +43,16 @@ async function uploadFile(file) {
   const xhr = new XMLHttpRequest();
   xhr.open("PUT", url, true);
 
-  const startTime = new Date().getTime(); // Capture the start time for speed calculation
+  const startTime = new Date().getTime();
 
   xhr.upload.onprogress = function(e) {
     if (e.lengthComputable) {
       const percentComplete = (e.loaded / e.total) * 100;
-      document.getElementById("uploadPercentage").innerText = percentComplete.toFixed(2) + "%"; // Update progress percentage
+      document.getElementById("uploadPercentage").innerText = percentComplete.toFixed(2) + "%";
 
-      const speed = calculateSpeed(e.loaded, startTime); // Calculate upload speed
-      document.getElementById("uploadSpeed").innerText = speed.toFixed(2) + " KB/s"; // Update upload speed display
+      const speed = calculateSpeed(e.loaded, startTime);
+      document.getElementById("uploadSpeed").innerText = speed.toFixed(2) + " KB/s";
+      updateSpeedChart(speedChart, speed);
     }
   };
 
@@ -75,9 +77,7 @@ async function uploadFile(file) {
 
   xhr.setRequestHeader("Content-Type", file.type);
   xhr.send(file);
-  document.getElementById("speedChart").style.display = "block"; // Show the chart, if relevant to your application
 }
-
 
 function handleDragOver(e) {
   e.preventDefault();
@@ -140,20 +140,21 @@ function resetUploadButton() {
 
 window.onload = function () {
   dragDropArea = document.getElementById("drag-drop-area");
-  const fileInput = document.getElementById("file-input");
-  fileInfoDisplay = document.getElementById("file-info");
-  const uploadButton = document.getElementById("upload-button");
-  document.getElementById("speedChart").style.display = "none";
-
+  dragDropArea.addEventListener("click", triggerFileSelect);
   dragDropArea.addEventListener("dragover", handleDragOver);
   dragDropArea.addEventListener("drop", handleFileDrop);
   dragDropArea.addEventListener("dragleave", resetDragDropArea);
-  dragDropArea.addEventListener("click", triggerFileSelect);
+
+  fileInfoDisplay = document.getElementById("file-info");
+  
+  const fileInput = document.getElementById("file-input");
   fileInput.addEventListener("change", handleFileSelect);
 
+  const uploadButton = document.getElementById("upload-button");
   uploadButton.disabled = true;
   uploadButton.addEventListener("click", function() {
     uploadFile(fileInput.files[0]);
+    document.getElementById("speedChart").style.display = "block"; // Show the chart when upload starts
   });
 
   // Chart Initialization
@@ -179,4 +180,7 @@ window.onload = function () {
       },
     },
   });
+
+  // Initially hide the speed chart
+  document.getElementById("speedChart").style.display = "none";
 };
