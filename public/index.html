@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +29,21 @@
 			<!-- Add other elements of your page as needed -->
 			<button id="upload-button" disabled>Upload</button>
 		</div>
-		<div id="uploadStatus">
+		
+    <div class="upload-controls">
+        <label for="chunkSizeSlider">Select chunk size (MB): </label>
+        <input type="range" id="chunkSizeSlider" name="chunkSize" min="5" max="50" value="5" step="5">
+        <span id="chunkSizeDisplay">5 MB</span>
+        
+        <div id="chunkInfo">
+            <p>Total Chunks: <span id="totalChunks">0</span></p>
+            <p>Uploaded Chunks: <span id="uploadedChunks">0</span></p>
+            <p>Failed Chunks: <span id="failedChunks">0</span></p>
+        </div>
+
+        <ul id="failedChunksList"></ul> <!-- List of failed chunks -->
+    </div>
+    <div id="uploadStatus">
 			<div id="speedDisplay" class="speed-display"></div>
 			<h2 id="uploadPercentage">0%</h2>
 			<h2 id="uploadSpeed">0 KB/s</h2>
