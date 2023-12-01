@@ -1,365 +1,195 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
-
-/* General Styles */
-body {
-    font-family: 'Nunito', sans-serif;
-    background-color: #191a1c; /* White background */
+/* Basic Reset */
+* {
     margin: 0;
-    padding: 20px;
-    color: #ffffff; /* Black text */
-}
-
-/* Drag-Drop Area */
-#drag-drop-area {
-    border: 2px dashed #ffffff; /* Black dashed border */
-    border-radius: 5px;
-    padding: 20px;
-    text-align: center;
-    background-color: #191a1c; /* White background */
-    cursor: pointer;
-    width: calc(100% - 40px);
-    margin: 10px auto;
+    padding: 0;
     box-sizing: border-box;
-}
-
-#drag-drop-area:hover, #drag-drop-area.active {
-    background-color: #F5F5F5; /* Light gray for hover */
-    border-color: #ffffff;
-}
-
-/* File Input and Labels */
-input[type='file'] {
-    display: none;
-}
-
-.speed-display {
-    font-size: 3em; /* Big and bold */
-    color: #ff4500; /* Let's make it pop */
-    text-align: center; /* Center stage */
-    padding: 20px; /* Comfortable space */
-    /* Add more styling as per your design theme */
-}
-
-
-.custom-file-label {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #ffffff; /* Black background */
-    color: #191a1c; /* White text */
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.custom-file-label:hover {
-    background-color: #333333; /* Dark gray on hover */
-}
-
-/* File Info and Upload Button Container */
-.file-info-upload-container {
-    width: 100%;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+    background-color: #131c2f; /* Dark blue background */
+    padding: 20px;
+  }
+  
+  /* Container styles */
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  /* Card styles */
+  .card {
+    background: #192a45; /* Slightly lighter blue for contrast */
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Header styles */
+  .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
-}
-
-/* File Info Styling */
-#file-info {
-    font-size: 14px;
-    color: #ffffff; /* Black text */
-    flex-grow: 1;
-}
-
-/* Upload Button Styling */
-#upload-button {
-    background: #ffffff; /* Black background */
-    color: #191a1c; /* White text */
-    padding: 12px 24px;
-    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  
+  /* Drag and drop styles */
+  #drag-drop-area {
+    border: 2px dashed #4a5c6b; /* Darker blue border */
+    border-radius: 10px;
+    text-align: center;
+    padding: 40px;
+    margin-bottom: 20px;
+  }
+  
+  /* Button styles */
+  button {
+    background-color: #4a5c6b; /* Button color */
+    color: #fff;
     border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    flex-grow: 0;
-}
-
-#upload-button:disabled {
-    background: #CCCCCC; /* Light gray for disabled state */
-    color: #666666; /* Dark gray text for disabled state */
-}
-
-#upload-button:hover:enabled {
-    background: #333333; /* Dark gray on hover */
-}
-
-/* File Statistics */
-#file-stats {
-    font-size: 0.9em;
-}
-
-.stat-item {
-    margin-bottom: 10px;
-}
-
-/* Progress Bar */
-#upload-progress, .progress-bar {
     border-radius: 5px;
-    height: 20px;
-    background-color: #ffffff; /* Black background for progress bar */
-    width: 0%;
-    transition: width 0.4s ease-in-out;
-}
-
-/* SpeedChart Styles */
-#speedChart {
-    /* Adjust chart styles to fit the new color scheme */
-}
-
-#uploadStatus h2 {
-    font-size: 2em; /* Large font size */
-    text-align: center;
-    margin: 10px 0;
-}
-
-#uploadPercentage, #uploadSpeed {
-    opacity: 0; /* Initially hidden */
-    transition: opacity 3s ease-in-out;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    #drag-drop-area {
-        padding: 10px;
-    }
-
-    .file-info-upload-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    #file-info {
-        order: 2;
-        margin-bottom: 10px;
-    }
-
-    #upload-button {
-        order: 1;
-        width: 100%;
-        margin-top: 0;
-        margin-bottom: 10px;
-    }
-}
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
-
-/* General Styles */
-body {
-    font-family: 'Nunito', sans-serif;
-    background-color: #191a1c; /* White background */
-    margin: 0;
-    padding: 20px;
-    color: #ffffff; /* Black text */
-}
-
-/* Drag-Drop Area */
-#drag-drop-area {
-    border: 2px dashed #ffffff; /* Black dashed border */
-    border-radius: 5px;
-    padding: 20px;
-    text-align: center;
-    background-color: #191a1c; /* White background */
+    padding: 10px 15px;
+    font-size: 16px;
     cursor: pointer;
-    width: calc(100% - 40px);
-    margin: 10px auto;
-    box-sizing: border-box;
-}
-
-
-#drag-drop-area:hover {
-    background-color: #2a2b30; /* Dark color for hover state */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-}
-
-
-/* File Input and Labels */
-input[type='file'] {
-    display: none;
-}
-
-.speed-display {
-    font-size: 3em; /* Big and bold */
-    color: #ff4500; /* Let's make it pop */
-    text-align: center; /* Center stage */
-    padding: 20px; /* Comfortable space */
-    /* Add more styling as per your design theme */
-}
-
-
-.custom-file-label {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #ffffff; /* Black background */
-    color: #191a1c; /* White text */
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.custom-file-label:hover {
-    background-color: #333333; /* Dark gray on hover */
-}
-
-/* File Info and Upload Button Container */
-.file-info-upload-container {
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #677a92; /* Button hover state */
+  }
+  
+  /* Speed display styles */
+  #speedDisplay {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Upload info styles */
+  .upload-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Progress bar styles */
+  .progress-bar {
     width: 100%;
+    background-color: #4a5c6b;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .progress-bar-inner {
+    height: 20px;
+    width: 0%;
+    background-color: #677a92;
+    transition: width 0.3s ease;
+  }
+  
+  /* Slider styles */
+  .slider-container {
+    margin: 20px 0;
+  }
+  
+  input[type="range"] {
+    width: 100%;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .upload-info {
+      flex-direction: column;
+    }
+  
+    button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  
+  /* Base styles for the card panels */
+.card-panel {
+    background: #192a45; /* Slightly lighter blue for contrast */
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+  }
+  
+  /* Flex container for layout */
+  .flex-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-}
-
-/* File Info Styling */
-#file-info {
-    font-size: 14px;
-    color: #ffffff; /* Black text */
-    flex-grow: 1;
-}
-
-/* Upload Button Styling */
-#upload-button {
-    background: #ffffff; /* Black background */
-    color: #191a1c; /* White text */
-    padding: 12px 24px;
-    font-size: 16px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    flex-grow: 0;
-}
-
-#upload-button:disabled {
-    background: #CCCCCC; /* Light gray for disabled state */
-    color: #666666; /* Dark gray text for disabled state */
-}
-
-#upload-button:hover:enabled {
-    background: #333333; /* Dark gray on hover */
-}
-
-/* File Statistics */
-#file-stats {
-    font-size: 0.9em;
-}
-
-.stat-item {
-    margin-bottom: 10px;
-}
-
-/* Progress Bar */
-#upload-progress, .progress-bar {
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+  }
+  
+  /* Individual card styles */
+  .file-info-card,
+  .upload-speed-card,
+  .upload-progress-card,
+  .chunk-info-card {
+    flex-basis: calc(50% - 20px); /* Two cards per row with gap */
+  }
+  
+  /* Smaller text for labels within cards */
+  .card-panel label {
+    font-size: 0.85em;
+    color: #a7b1c2; /* Lighter text color for labels */
+  }
+  
+  /* Larger text for display values */
+  .card-panel .display-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+  
+  /* Specific styles for the upload progress bar within its card */
+  .upload-progress-card .progress-bar {
+    background-color: #4a5c6b;
     border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .upload-progress-card .progress-bar-inner {
     height: 20px;
-    background-color: #ffffff; /* Black background for progress bar */
-    width: 0%;
-    transition: width 0.4s ease-in-out;
-}
-
-/* SpeedChart Styles */
-#speedChart {
-    /* Adjust chart styles to fit the new color scheme */
-}
-
-#uploadStatus h2 {
-    font-size: 2em; /* Large font size */
-    text-align: center;
-    margin: 10px 0;
-}
-
-#uploadPercentage, #uploadSpeed {
-    opacity: 0; /* Initially hidden */
-    transition: opacity 3s ease-in-out;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    #drag-drop-area {
-        padding: 10px;
+    background-color: #677a92;
+    width: 0%; /* Updated dynamically */
+  }
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .file-info-card,
+    .upload-speed-card,
+    .upload-progress-card,
+    .chunk-info-card {
+      flex-basis: 100%; /* One card per row */
     }
-
-    .file-info-upload-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    #file-info {
-        order: 2;
-        margin-bottom: 10px;
-    }
-
-    #upload-button {
-        order: 1;
-        width: 100%;
-        margin-top: 0;
-        margin-bottom: 10px;
-    }
-}
-
-/* Add your new styles at the end of the styles.css file */
-
-.main-container {
-    display: flex;
-}
-
-#drag-drop-area {
-    flex: 2; /* Takes double the space of the speed chart */
-}
-
-.chart-container {
-    flex: 1; /* Takes half the width of the drag-drop area */
-}
-
-
-
-/* New styles for main-container, drag-drop-area, and chart-container */
-.main-container {
-    display: flex;
-}
-
-#drag-drop-area {
-    flex: 2; /* Takes double the space of the speed chart */
-}
-
-.chart-container {
-    flex: 1; /* Takes half the width of the drag-drop area */
-    display: flex;
-    justify-content: center; /* Center the chart horizontally */
-    align-items: center; /* Center the chart vertically */
-}
-
-#speedChart {
-    width: 50%; /* Half the width of its parent */
-    height: 50%; /* Half the height of its parent */
-}
-
-#drag-drop-area {
-    font-family: 'Nunito', sans-serif; /* Sets the font to Nunito */
-    font-size: 24px; /* Larger font size */
-    font-weight: 300; /* Thinner font weight */
-    letter-spacing: 2px; /* Wider kerning */
-}
-
-#pause-button, #resume-button {
-    margin: 5px;
-    padding: 10px;
-    border: none;
-    background-color: #4CAF50; /* Green */
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#pause-button:disabled, #resume-button:disabled {
-    background-color: #cccccc;
-    cursor: default;
-}
+  }
+  
+  /* Apply this class to elements that should be hidden initially */
+  .hidden {
+    display: none;
+  }
+  
+  /* Transition for opacity changes */
+  .fade-in {
+    transition: opacity 0.5s ease-out;
+  }
+  
+  /* Utility classes for margins and padding */
+  .mt-20 { margin-top: 20px; }
+  .mb-20 { margin-bottom: 20px; }
+  .py-10 { padding-top: 10px; padding-bottom: 10px; }
+  
