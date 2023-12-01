@@ -20,20 +20,13 @@
   }
   
   /* Card styles */
-  .card {
+  .card-panel {
     background: #192a45; /* Slightly lighter blue for contrast */
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  }
-  
-  /* Header styles */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
   }
   
   /* Drag and drop styles */
@@ -54,6 +47,9 @@
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-bottom: 10px; /* Space between buttons */
     transition: background-color 0.3s ease;
   }
   
@@ -61,43 +57,20 @@
     background-color: #677a92; /* Button hover state */
   }
   
-  /* Speed display styles */
-  #speedDisplay {
-    font-size: 2em;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Upload info styles */
-  .upload-info {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  /* Progress bar styles */
-  .progress-bar {
-    width: 100%;
-    background-color: #4a5c6b;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .progress-bar-inner {
-    height: 20px;
-    width: 0%;
-    background-color: #677a92;
-    transition: width 0.3s ease;
-  }
-  
   /* Slider styles */
-  .slider-container {
-    margin: 20px 0;
+  input[type="range"] {
+    width: calc(100% - 60px); /* Adjust width to allow room for label */
+    margin: 10px 0; /* Spacing above and below slider */
   }
   
-  input[type="range"] {
+  /* Chart styles */
+  .chart-container {
+    margin-bottom: 20px;
+  }
+  
+  #speedChart {
     width: 100%;
+    height: auto;
   }
   
   /* Responsive design */
@@ -106,90 +79,8 @@
       padding: 10px;
     }
   
-    .upload-info {
-      flex-direction: column;
-    }
-  
-    button {
-      width: 100%;
+    .card-panel {
       margin-bottom: 10px;
     }
   }
-  
-  /* Base styles for the card panels */
-.card-panel {
-    background: #192a45; /* Slightly lighter blue for contrast */
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #ffffff;
-  }
-  
-  /* Flex container for layout */
-  .flex-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px; /* Space between cards */
-  }
-  
-  /* Individual card styles */
-  .file-info-card,
-  .upload-speed-card,
-  .upload-progress-card,
-  .chunk-info-card {
-    flex-basis: calc(50% - 20px); /* Two cards per row with gap */
-  }
-  
-  /* Smaller text for labels within cards */
-  .card-panel label {
-    font-size: 0.85em;
-    color: #a7b1c2; /* Lighter text color for labels */
-  }
-  
-  /* Larger text for display values */
-  .card-panel .display-value {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-top: 5px;
-  }
-  
-  /* Specific styles for the upload progress bar within its card */
-  .upload-progress-card .progress-bar {
-    background-color: #4a5c6b;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .upload-progress-card .progress-bar-inner {
-    height: 20px;
-    background-color: #677a92;
-    width: 0%; /* Updated dynamically */
-  }
-  
-  /* Adjustments for smaller screens */
-  @media (max-width: 768px) {
-    .file-info-card,
-    .upload-speed-card,
-    .upload-progress-card,
-    .chunk-info-card {
-      flex-basis: 100%; /* One card per row */
-    }
-  }
-  
-  /* Apply this class to elements that should be hidden initially */
-  .hidden {
-    display: none;
-  }
-  
-  /* Transition for opacity changes */
-  .fade-in {
-    transition: opacity 0.5s ease-out;
-  }
-  
-  /* Utility classes for margins and padding */
-  .mt-20 { margin-top: 20px; }
-  .mb-20 { margin-bottom: 20px; }
-  .py-10 { padding-top: 10px; padding-bottom: 10px; }
   

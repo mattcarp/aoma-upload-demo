@@ -1,62 +1,61 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>File Uploader</title>
-	<!-- <link rel="icon" href="/path/to/favicon.png" type="image/png"> -->
-	<link rel="icon" href="favicon.png" type="image/png">
-
-	<link rel="stylesheet" href="styles.css">
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script> -->
-	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.766.0.min.js"></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Uploader</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.766.0.min.js"></script>
 </head>
-
 <body>
-	<div class="uploader-container">
-		<div id="drag-drop-area">
-			<p>Drag files here or click to select</p>
-			<input type="file" id="file-input" hidden />
-		</div>
-		<div class="file-info-upload-container">
-
-			<!-- Added file information display area -->
-			<div id="file-info" style="margin-top: 10px;"> <!-- File information will be displayed here --></div>
-			<!-- Add other elements of your page as needed -->
-			<button id="upload-button" disabled>Upload</button>
-			<button id="pause-button" disabled>Pause</button>
-        <button id="resume-button" disabled>Resume</button>
-		</div>
-		
-    <div class="upload-controls">
-        <label for="chunkSizeSlider">Select chunk size (MB): </label>
-        <input type="range" id="chunkSizeSlider" name="chunkSize" min="5" max="50" value="5" step="5">
-        <span id="chunkSizeDisplay">5 MB</span>
-        
-        <div id="chunkInfo">
-            <p>Total Chunks: <span id="totalChunks">0</span></p>
-            <p>Uploaded Chunks: <span id="uploadedChunks">0</span></p>
-            <p>Failed Chunks: <span id="failedChunks">0</span></p>
-        </div>
-
-        <ul id="failedChunksList"></ul> <!-- List of failed chunks -->
+  <div class="container">
+    <!-- Drag & Drop Area -->
+    <div id="drag-drop-area" class="card-panel">
+      <p>Drag files here or click to select</p>
+      <input type="file" id="file-input" hidden />
     </div>
-    <div id="uploadStatus">
-			<div id="speedDisplay" class="speed-display"></div>
-			<h2 id="uploadPercentage">0%</h2>
-			<h2 id="uploadSpeed">0 KB/s</h2>
-		</div>
-		<div class="chart-container">
-			<canvas id="speedChart"></canvas>
-		</div>
-		<!-- Your other body content here -->
 
-		<!-- Include your JavaScript files -->
-		<script src="js/upload.js"></script>
+    <!-- Speed Chart -->
+    <div class="card-panel chart-container">
+      <canvas id="speedChart"></canvas>
+    </div>
+
+    <!-- Chunk Size Selection -->
+    <div class="card-panel">
+      <label for="chunkSizeSlider">Select chunk size (MB):</label>
+      <input type="range" id="chunkSizeSlider" name="chunkSize" min="5" max="50" value="5">
+      <span id="chunkSizeDisplay">5 MB</span>
+    </div>
+
+    <!-- Upload Controls -->
+    <div class="card-panel">
+      <button id="upload-button" disabled>Upload</button>
+      <button id="pause-button" disabled>Pause</button>
+      <button id="resume-button" disabled>Resume</button>
+    </div>
+
+    <!-- Speed Display -->
+    <div class="card-panel">
+      <div id="speedDisplay">326.3078 Mbps</div>
+    </div>
+
+    <!-- Upload Progress -->
+    <div class="card-panel">
+      <h2 id="uploadPercentage">0%</h2>
+      <h2 id="uploadSpeed">0 KB/s</h2>
+    </div>
+
+    <!-- Chunk Info -->
+    <div id="file-info" class="card-panel"><!-- File information will be displayed here --></div>
+
+      <p>Total Chunks: <span id="totalChunks">0</span></p>
+      <p>Uploaded Chunks: <span id="uploadedChunks">0</span></p>
+      <p>Failed Chunks: <span id="failedChunks">0</span></p>
+    </div>
+  </div>
+
+  <script src="js/upload.js"></script>
 </body>
-
 </html>

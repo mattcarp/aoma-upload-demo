@@ -153,8 +153,8 @@ function resetUploadDisplay() {
   uploadSpeed.style.opacity = "0";
 
   setTimeout(() => {
-    uploadPercentage.innerText = "0%";
-    uploadSpeed.innerText = "0 KB/s";
+    // uploadPercentage.innerText = "0%";
+    // uploadSpeed.innerText = "0 KB/s";
 
     uploadPercentage.style.opacity = "1";
     uploadSpeed.style.opacity = "1";
