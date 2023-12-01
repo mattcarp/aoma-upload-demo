@@ -54,6 +54,7 @@ console.log("AWS.config: ", AWS.config);
 const s3 = new AWS.S3();
 
 app.get('/generate-signed-url', (req, res) => {
+  console.log("called generate-signed-url");
   const params = {
     Bucket: 'aoma-demo-bucket',
     Key: req.query.filename,

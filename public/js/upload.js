@@ -4,6 +4,7 @@ let speedChart; // Declare speedChart globally
 
 async function getSignedUrl(filename, contentType) {
   try {
+
     const response = await fetch(
       `http://localhost:3000/generate-signed-url?filename=${encodeURIComponent(
         filename
@@ -11,6 +12,7 @@ async function getSignedUrl(filename, contentType) {
     );
     if (response.ok) {
       const data = await response.json();
+      console.log("signed url, from within getSignedUrl: ", data.signedUrl);
       return data.signedUrl;
     } else {
       console.error(
@@ -35,7 +37,7 @@ fetch("/api/speedtest")
 
 function displaySpeed(speed) {
   const speedElement = document.getElementById("speedDisplay");
-  speedElement.textContent = `${speed} Mbps`;
+  speedElement.textContent = `${speed.toFixed(4)} Mbps`;
 }
 
 function updateSpeedChart(chart, speed) {
@@ -53,8 +55,11 @@ function calculateSpeed(bytesUploaded, startTime) {
 }
 
 async function uploadFile(file) {
-  const url = await getSignedUrl(file.name, file.type);
+  console.log("called uploadFile:", file.name, file.type);
 
+  // Get the signed URL for the entire file
+  console.log("about to GET signed url");
+  const url = await getSignedUrl(file.name, file.type);
   if (!url) {
     console.error("No signed URL returned.");
     return;
@@ -62,44 +67,48 @@ async function uploadFile(file) {
 
   const xhr = new XMLHttpRequest();
   xhr.open("PUT", url, true);
+  xhr.setRequestHeader("Content-Type", file.type);
 
-  const startTime = new Date().getTime();
-
+  // Event handler for upload progress
   xhr.upload.onprogress = function (e) {
     if (e.lengthComputable) {
       const percentComplete = (e.loaded / e.total) * 100;
-      document.getElementById("uploadPercentage").innerText =
+      document.getElementById("uploadPercentage").innerText = 
         percentComplete.toFixed(2) + "%";
 
-      const speed = calculateSpeed(e.loaded, startTime);
-      document.getElementById("uploadSpeed").innerText =
+      const speed = calculateSpeed(e.loaded, new Date().getTime());
+      document.getElementById("uploadSpeed").innerText = 
         speed.toFixed(2) + " KB/s";
       updateSpeedChart(speedChart, speed);
     }
   };
 
+  // Event handler for successful upload completion
   xhr.onload = function () {
     if (xhr.status === 200) {
       console.log("File uploaded successfully");
+      // You can add more UI update logic here if needed
     } else {
       console.error("Upload failed:", xhr.responseText);
     }
   };
 
+  // Event handler for upload errors
   xhr.onerror = function () {
     console.error("Error during the upload process.");
   };
 
+  // Event handler for upload completion (successful or not)
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       console.log("Upload complete");
       resetUploadButton();
     }
   };
-
-  xhr.setRequestHeader("Content-Type", file.type);
-  xhr.send(file);
+console.log("about to send file");
+  xhr.send(file); // Start the upload
 }
+
 
 function handleDragOver(e) {
   e.preventDefault();
@@ -175,13 +184,14 @@ window.onload = function () {
   const uploadButton = document.getElementById("upload-button");
   uploadButton.disabled = true;
   uploadButton.addEventListener("click", function () {
+    console.log("Upload button clicked", fileInput.files[0]);
+    console.log("about to call uploadFile, which doesn't do anything");
     uploadFile(fileInput.files[0]);
     document.getElementById("speedChart").style.display = "block"; // Show the chart when upload starts
   });
 
   // Chart Initialization
-  const data = {
-    datasets: [{
+  const data = {    datasets: [{
       label: 'Dataset 1',
       data: [/* Your data points */],
       borderColor: '#2a41a1', // Graph Line Color 1
@@ -224,7 +234,7 @@ window.onload = function () {
           drawBorder: true,
         },
         ticks: {
-          min: 450, // Start at 450 Mbps
+          min: 10, // Start at 10 Mbps
           stepSize: 50, // Adjust this value as needed for your scale steps
           fontColor: 'white' // Assuming a light font color for visibility against the dark background
         }
@@ -317,21 +327,60 @@ document.getElementById('chunkSizeSlider').addEventListener('input', function() 
 });
 
 async function uploadFile(file) {
-    const chunkSize = 5; // placehoder value to avoid errors
-    const totalChunks = Math.ceil(file.size / chunkSize);
-    document.getElementById('totalChunks').textContent = totalChunks;
+  console.log("Uploading file:", file.name, file.type);
 
-    for (let i = 0; i < totalChunks; i++) {
-        const chunk = file.slice(i * chunkSize, (i + 1) * chunkSize);
-        await uploadChunk(chunk, i, totalChunks); // Call the chunk upload function
+  // Get the signed URL for the entire file
+  const url = await getSignedUrl(file.name, file.type);
+  if (!url) {
+    console.error("No signed URL returned.");
+    return;
+  }
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("PUT", url, true);
+  xhr.setRequestHeader("Content-Type", file.type);
+
+  // Event handler for upload progress
+  xhr.upload.onprogress = function (e) {
+    if (e.lengthComputable) {
+      const percentComplete = (e.loaded / e.total) * 100;
+      document.getElementById("uploadPercentage").innerText = 
+        percentComplete.toFixed(2) + "%";
+
+      const speed = calculateSpeed(e.loaded, new Date().getTime());
+      document.getElementById("uploadSpeed").innerText = 
+        speed.toFixed(2) + " KB/s";
+      updateSpeedChart(speedChart, speed);
     }
+  };
+
+  // Event handler for successful upload completion
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      console.log("File uploaded successfully");
+      // You can add more UI update logic here if needed
+    } else {
+      console.error("Upload failed:", xhr.responseText);
+    }
+  };
+
+  // Event handler for upload errors
+  xhr.onerror = function () {
+    console.error("Error during the upload process.");
+  };
+
+  // Event handler for upload completion (successful or not)
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      console.log("Upload complete");
+      resetUploadButton();
+    }
+  };
+
+  xhr.send(file); // Start the upload
 }
 
-async function uploadChunk(chunk, chunkNumber, totalChunks) {
-    // Implement the logic to upload the chunk
-    // Update the UI based on success or failure of each chunk upload
-    // If a chunk upload fails, add it to the failed chunks list and provide a retry option
-}
+
 
 function updateChunkInfo(uploadedChunks, totalChunks) {
     document.getElementById('uploadedChunks').textContent = uploadedChunks;
@@ -343,4 +392,30 @@ function updateFailedChunksList(failedChunks) {
 
 function updateProgressBar(progressPercentage) {
     // Update the progress bar based on the current upload status
+}
+let isPaused = false;
+let lastUploadedChunkIndex = 0;
+
+document.getElementById('pause-button').addEventListener('click', function() {
+    isPaused = true;
+});
+
+document.getElementById('resume-button').addEventListener('click', function() {
+    isPaused = false;
+    if (fileInput.files.length > 0) {
+        continueUploading(fileInput.files[0], lastUploadedChunkIndex);
+    }
+});
+
+function continueUploading(file, startIndex) {
+    // Assuming chunkSize is defined globally or retrieved from a relevant source
+    const chunkSize = 5 * 1024 * 1024;
+    const totalChunks = Math.ceil(file.size / chunkSize);
+    for (let i = startIndex; i < totalChunks; i++) {
+        if (isPaused) {
+            lastUploadedChunkIndex = i;
+            break;
+        }
+        // Existing logic to upload chunk[i]
+    }
 }

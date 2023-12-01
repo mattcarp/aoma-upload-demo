@@ -31,3 +31,39 @@ describe("Upload process", () => {
     });
 });
 
+
+describe("Chunk size slider", () => {
+    test("updates chunk size on slider change", () => {
+        // Simulate slider change and assert the chunk size is updated
+        // Note: This requires DOM manipulation or mocking
+    });
+});
+
+describe("Chunk upload functionality", () => {
+    test("splits file into correct number of chunks", () => {
+        // Mock file upload and assert the correct number of chunks are created
+        // Note: This requires mocking file and chunk upload logic
+    });
+
+    test("handles failed chunk uploads", () => {
+        // Simulate failed chunk uploads and test retry logic
+        // Note: This may require mocking network failures
+    });
+});
+
+describe("UI updates during upload", () => {
+    test("updates progress bar during upload", () => {
+        // Simulate file upload and assert progress bar updates
+        // Note: Requires DOM manipulation or mocking
+    });
+
+    test("updates chunk counters correctly", () => {
+        // Simulate file upload and assert chunk counters update
+        // Note: Requires DOM manipulation or mocking
+    });
+
+    test("lists failed chunks accurately", () => {
+        // Simulate failed uploads and assert failed chunks are listed
+        // Note: Requires DOM manipulation or mocking
+    });
+});

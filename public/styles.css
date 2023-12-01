@@ -348,3 +348,18 @@ input[type='file'] {
     font-weight: 300; /* Thinner font weight */
     letter-spacing: 2px; /* Wider kerning */
 }
+
+#pause-button, #resume-button {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#pause-button:disabled, #resume-button:disabled {
+    background-color: #cccccc;
+    cursor: default;
+}
