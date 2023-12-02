@@ -4,7 +4,6 @@ let speedChart; // Declare speedChart globally
 
 async function getSignedUrl(filename, contentType) {
   try {
-
     const response = await fetch(
       `http://localhost:3000/generate-signed-url?filename=${encodeURIComponent(
         filename
@@ -57,8 +56,6 @@ function calculateSpeed(bytesUploaded, startTime) {
 async function uploadFile(file) {
   console.log("called uploadFile:", file.name, file.type);
 
-  // Get the signed URL for the entire file
-  console.log("about to GET signed url");
   const url = await getSignedUrl(file.name, file.type);
   if (!url) {
     console.error("No signed URL returned.");
@@ -69,46 +66,39 @@ async function uploadFile(file) {
   xhr.open("PUT", url, true);
   xhr.setRequestHeader("Content-Type", file.type);
 
-  // Event handler for upload progress
   xhr.upload.onprogress = function (e) {
     if (e.lengthComputable) {
       const percentComplete = (e.loaded / e.total) * 100;
-      document.getElementById("uploadPercentage").innerText = 
-        percentComplete.toFixed(2) + "%";
+      document.getElementById("uploadPercentage").innerText = percentComplete.toFixed(2) + "%";
 
       const speed = calculateSpeed(e.loaded, new Date().getTime());
-      document.getElementById("uploadSpeed").innerText = 
-        speed.toFixed(2) + " KB/s";
+      document.getElementById("uploadSpeed").innerText = speed.toFixed(2) + " KB/s";
       updateSpeedChart(speedChart, speed);
     }
   };
 
-  // Event handler for successful upload completion
   xhr.onload = function () {
     if (xhr.status === 200) {
       console.log("File uploaded successfully");
-      // You can add more UI update logic here if needed
     } else {
       console.error("Upload failed:", xhr.responseText);
     }
   };
 
-  // Event handler for upload errors
   xhr.onerror = function () {
     console.error("Error during the upload process.");
   };
 
-  // Event handler for upload completion (successful or not)
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       console.log("Upload complete");
       resetUploadButton();
     }
   };
-console.log("about to send file");
-  xhr.send(file); // Start the upload
-}
 
+  console.log("about to send file");
+  xhr.send(file);
+}
 
 function handleDragOver(e) {
   e.preventDefault();
@@ -153,9 +143,6 @@ function resetUploadDisplay() {
   uploadSpeed.style.opacity = "0";
 
   setTimeout(() => {
-    // uploadPercentage.innerText = "0%";
-    // uploadSpeed.innerText = "0 KB/s";
-
     uploadPercentage.style.opacity = "1";
     uploadSpeed.style.opacity = "1";
   }, 3000);
@@ -185,237 +172,74 @@ window.onload = function () {
   uploadButton.disabled = true;
   uploadButton.addEventListener("click", function () {
     console.log("Upload button clicked", fileInput.files[0]);
-    console.log("about to call uploadFile, which doesn't do anything");
     uploadFile(fileInput.files[0]);
-    document.getElementById("speedChart").style.display = "block"; // Show the chart when upload starts
+    document.getElementById("speedChart").style.display = "block";
   });
 
-  // Chart Initialization
-  const data = {    datasets: [{
-      label: 'Dataset 1',
-      data: [/* Your data points */],
-      borderColor: '#2a41a1', // Graph Line Color 1
-      backgroundColor: 'rgba(42, 65, 161, 0.5)', // Translucent version of Graph Line Color 1
-      fill: false,
-      lineTension: 0.1, // Adjust line tension to your preference (0 for no bezier curves)
-      pointBackgroundColor: '#fff', // Color for the points
-      pointBorderColor: '#2a41a1', // Border color for the points
-      pointHoverBackgroundColor: '#2a41a1', // Hover color for the points
-      pointHoverBorderColor: '#fff', // Hover border color for the points
-    }, {
-      label: 'Dataset 2',
-      data: [/* Your data points */],
-      borderColor: '#2b3e9c', // Graph Line Color 2
-      backgroundColor: 'rgba(43, 62, 156, 0.5)', // Translucent version of Graph Line Color 2
-      fill: false,
-      lineTension: 0.1,
-      pointBackgroundColor: '#fff',
-      pointBorderColor: '#2b3e9c',
-      pointHoverBackgroundColor: '#2b3e9c',
-      pointHoverBorderColor: '#fff',
+ // Chart Initialization
+const ctx = document.getElementById("speedChart").getContext("2d");
+speedChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Upload Speed (KB/s)',
+      data: [],
+      backgroundColor: 'rgba(0, 123, 255, 0.2)',
+      borderColor: 'rgba(0, 123, 255, 1)',
+      borderWidth: 1
     }]
-  };
-  
-  const options = {
+  },
+  options: {
     scales: {
-      yAxes: [{
-        type: 'linear',
-        display: true,
-        position: 'left',
-        scaleLabel: {
-          display: true,
-          labelString: 'Speed (Mbps)'
-        },
-        gridLines: {
-          color: '#372d31', // Grid Line Color
-          lineWidth: 1,
-          zeroLineColor: '#372d31',
-          zeroLineWidth: 1,
-          drawBorder: true,
-        },
+      y: { // Updated to 'y' from 'yAxes'
+        beginAtZero: true,
         ticks: {
-          min: 10, // Start at 10 Mbps
-          stepSize: 50, // Adjust this value as needed for your scale steps
-          fontColor: 'white' // Assuming a light font color for visibility against the dark background
+          callback: function(value) {
+            return value + ' KB/s';
+          }
         }
-      }],
-      xAxes: [{
-        gridLines: {
-          color: '#372d31', // Grid Line Color
-          lineWidth: 1,
-          zeroLineColor: '#372d31',
-          zeroLineWidth: 1,
-          drawBorder: true,
-        },
-        ticks: {
-          fontColor: 'white' // Assuming a light font color for visibility against the dark background
-        },
-        scaleLabel: {
-          display: true,
-          labelString: 'Time',
-          fontColor: 'white'
+      },
+      x: { // Updated to 'x' from 'xAxes'
+        type: 'time',
+        time: {
+          unit: 'minute'
         }
-      }]
-    },
-    legend: {
-      display: true,
-      position: 'top',
-      labels: {
-        fontColor: 'white', // Assuming a light font color for visibility against the dark background
-        boxWidth: 20,
-      }
-    },
-    responsive: true,
-    maintainAspectRatio: false, // Ensures the chart size is responsive
-    maintainAspectRatio: false,
-    animation: {
-      duration: 1000, // Animation duration in milliseconds
-    },
-    hover: {
-      mode: 'nearest',
-      intersect: true
-    },
-    tooltips: {
-      mode: 'index',
-      intersect: false,
-    },
-    elements: {
-      line: {
-        tension: 0.4 // Smoothes out the line
       }
     }
-  };
-  
-  // Then you would initialize your chart with these options
-  // For example:
-  // new Chart(ctx, { type: 'line', data: data, options: options });
-  
+  }
+});
+document.getElementById("speedChart").style.display = "none";
 
-
-  var ctx = document.getElementById("speedChart").getContext("2d");
-  speedChart = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: [],
-      datasets: [
-        {
-          label: "Upload Speed (KB/s)",
-          backgroundColor: "rgba(0, 123, 255, 0.2)", // Example new background color
-          borderColor: "rgba(0, 123, 255, 1)", // Example new border color
-          data: [],
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
-
-  // Initially hide the speed chart
-  document.getElementById("speedChart").style.display = "none";
 };
 
 document.getElementById('chunkSizeSlider').addEventListener('input', function() {
-    const chunkSize = this.value * 1024 * 1024; // Convert MB to bytes
-    document.getElementById('chunkSizeDisplay').textContent = this.value + ' MB';
-    console.log('Chunk size set to:', chunkSize, 'bytes');
-    // Store chunkSize in a global variable or use it directly in the upload function
+  const chunkSize = this.value * 1024 * 1024;
+  document.getElementById('chunkSizeDisplay').textContent = this.value + ' MB';
+  console.log('Chunk size set to:', chunkSize, 'bytes');
 });
 
-async function uploadFile(file) {
-  console.log("Uploading file:", file.name, file.type);
-
-  // Get the signed URL for the entire file
-  const url = await getSignedUrl(file.name, file.type);
-  if (!url) {
-    console.error("No signed URL returned.");
-    return;
-  }
-
-  const xhr = new XMLHttpRequest();
-  xhr.open("PUT", url, true);
-  xhr.setRequestHeader("Content-Type", file.type);
-
-  // Event handler for upload progress
-  xhr.upload.onprogress = function (e) {
-    if (e.lengthComputable) {
-      const percentComplete = (e.loaded / e.total) * 100;
-      document.getElementById("uploadPercentage").innerText = 
-        percentComplete.toFixed(2) + "%";
-
-      const speed = calculateSpeed(e.loaded, new Date().getTime());
-      document.getElementById("uploadSpeed").innerText = 
-        speed.toFixed(2) + " KB/s";
-      updateSpeedChart(speedChart, speed);
-    }
-  };
-
-  // Event handler for successful upload completion
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      console.log("File uploaded successfully");
-      // You can add more UI update logic here if needed
-    } else {
-      console.error("Upload failed:", xhr.responseText);
-    }
-  };
-
-  // Event handler for upload errors
-  xhr.onerror = function () {
-    console.error("Error during the upload process.");
-  };
-
-  // Event handler for upload completion (successful or not)
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      console.log("Upload complete");
-      resetUploadButton();
-    }
-  };
-
-  xhr.send(file); // Start the upload
-}
-
-
-
-function updateChunkInfo(uploadedChunks, totalChunks) {
-    document.getElementById('uploadedChunks').textContent = uploadedChunks;
-}
-
-function updateFailedChunksList(failedChunks) {
-    // Update the list of failed chunks with retry options
-}
-
-function updateProgressBar(progressPercentage) {
-    // Update the progress bar based on the current upload status
-}
 let isPaused = false;
 let lastUploadedChunkIndex = 0;
 
 document.getElementById('pause-button').addEventListener('click', function() {
-    isPaused = true;
+  isPaused = true;
 });
 
 document.getElementById('resume-button').addEventListener('click', function() {
-    isPaused = false;
-    if (fileInput.files.length > 0) {
-        continueUploading(fileInput.files[0], lastUploadedChunkIndex);
-    }
+  isPaused = false;
+  if (fileInput.files.length > 0) {
+    continueUploading(fileInput.files[0], lastUploadedChunkIndex);
+  }
 });
 
 function continueUploading(file, startIndex) {
-    // Assuming chunkSize is defined globally or retrieved from a relevant source
-    const chunkSize = 5 * 1024 * 1024;
-    const totalChunks = Math.ceil(file.size / chunkSize);
-    for (let i = startIndex; i < totalChunks; i++) {
-        if (isPaused) {
-            lastUploadedChunkIndex = i;
-            break;
-        }
-        // Existing logic to upload chunk[i]
+  const chunkSize = 5 * 1024 * 1024;
+  const totalChunks = Math.ceil(file.size / chunkSize);
+  for (let i = startIndex; i < totalChunks; i++) {
+    if (isPaused) {
+      lastUploadedChunkIndex = i;
+      break;
     }
+  }
 }

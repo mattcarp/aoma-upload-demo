@@ -14,6 +14,9 @@
   
   /* Container styles */
   .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width: 1200px;
     margin: auto;
     padding: 20px;
@@ -27,6 +30,8 @@
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #ffffff;
+    width: 100%;
+    max-width: 960px; /* Adjust based on your layout preference */
   }
   
   /* Drag and drop styles */
@@ -47,14 +52,20 @@
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
-    display: block;
-    width: 100%;
-    margin-bottom: 10px; /* Space between buttons */
+    display: inline-block;
+    width: auto;
+    margin: 0 10px; /* Add space between buttons */
     transition: background-color 0.3s ease;
   }
   
   button:hover {
     background-color: #677a92; /* Button hover state */
+  }
+  
+  /* Adjust the button container to center the buttons */
+  .card-panel button {
+    display: flex;
+    justify-content: center;
   }
   
   /* Slider styles */
@@ -63,24 +74,40 @@
     margin: 10px 0; /* Spacing above and below slider */
   }
   
+  /* Label styling to match the reference */
+  input[type="range"] + span {
+    display: inline-block;
+    width: auto;
+    margin-left: 10px;
+  }
+  
   /* Chart styles */
   .chart-container {
     margin-bottom: 20px;
   }
   
   #speedChart {
+    height: 200px; /* Fixed height for the chart */
     width: 100%;
-    height: auto;
   }
   
   /* Responsive design */
   @media (max-width: 768px) {
     .container {
+      width: 100%;
       padding: 10px;
+    }
+  
+    button {
+      margin-bottom: 10px;
     }
   
     .card-panel {
       margin-bottom: 10px;
+    }
+  
+    input[type="range"] {
+      width: 100%; /* Full width on smaller screens */
     }
   }
   
