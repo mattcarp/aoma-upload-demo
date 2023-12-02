@@ -34,10 +34,10 @@ fetch("/api/speedtest")
   })
   .catch((error) => console.error("Error fetching the speed:", error));
 
-function displaySpeed(speed) {
-  const speedElement = document.getElementById("speedDisplay");
-  speedElement.textContent = `${speed.toFixed(4)} Mbps`;
-}
+  function displaySpeed(speed) {
+    const speedElement = document.getElementById("internet-speed-value"); // Updated ID
+    speedElement.textContent = `${speed.toFixed(4)} Mbps`;
+  }
 
 function updateSpeedChart(chart, speed) {
   const currentTime = new Date().toLocaleTimeString();
@@ -69,10 +69,10 @@ async function uploadFile(file) {
   xhr.upload.onprogress = function (e) {
     if (e.lengthComputable) {
       const percentComplete = (e.loaded / e.total) * 100;
-      document.getElementById("uploadPercentage").innerText = percentComplete.toFixed(2) + "%";
+      document.getElementById("percent-complete-value").innerText = percentComplete.toFixed(2) + "%"; // Updated ID
 
       const speed = calculateSpeed(e.loaded, new Date().getTime());
-      document.getElementById("uploadSpeed").innerText = speed.toFixed(2) + " KB/s";
+      document.getElementById("internet-speed-value").innerText = speed.toFixed(2) + " KB/s"; // Updated ID
       updateSpeedChart(speedChart, speed);
     }
   };
@@ -136,8 +136,8 @@ function triggerFileSelect() {
 }
 
 function resetUploadDisplay() {
-  const uploadPercentage = document.getElementById("uploadPercentage");
-  const uploadSpeed = document.getElementById("uploadSpeed");
+  const uploadPercentage = document.getElementById("percent-complete-value");
+  const uploadSpeed = document.getElementById("internet-speed-value");
 
   uploadPercentage.style.opacity = "0";
   uploadSpeed.style.opacity = "0";
@@ -163,7 +163,7 @@ window.onload = function () {
   dragDropArea.addEventListener("drop", handleFileDrop);
   dragDropArea.addEventListener("dragleave", resetDragDropArea);
 
-  fileInfoDisplay = document.getElementById("file-info");
+  fileInfoDisplay = document.getElementById("file-info"); // Make sure this ID exists in your HTML;
 
   const fileInput = document.getElementById("file-input");
   fileInput.addEventListener("change", handleFileSelect);
@@ -177,39 +177,33 @@ window.onload = function () {
   });
 
  // Chart Initialization
-const ctx = document.getElementById("speedChart").getContext("2d");
-speedChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: [],
-    datasets: [{
-      label: 'Upload Speed (KB/s)',
-      data: [],
-      backgroundColor: 'rgba(0, 123, 255, 0.2)',
-      borderColor: 'rgba(0, 123, 255, 1)',
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: { // Updated to 'y' from 'yAxes'
-        beginAtZero: true,
-        ticks: {
-          callback: function(value) {
-            return value + ' KB/s';
-          }
-        }
-      },
-      x: { // Updated to 'x' from 'xAxes'
-        type: 'time',
-        time: {
-          unit: 'minute'
-        }
-      }
-    }
-  }
-});
-document.getElementById("speedChart").style.display = "none";
+ var ctx = document.getElementById("speedChart").getContext("2d");
+ speedChart = new Chart(ctx, {
+   type: "line",
+   data: {
+     labels: [], // No initial labels
+     datasets: [{
+       label: "Upload Speed (KB/s)",
+       backgroundColor: "rgba(0, 123, 255, 0.2)",
+       borderColor: "rgba(0, 123, 255, 1)",
+       data: [], // Start with an empty data array
+       fill: false,
+     }],
+   },
+   options: {
+     scales: {
+       y: {
+         beginAtZero: true,
+       },
+     },
+     legend: {
+       display: true,
+     },
+     responsive: true,
+     maintainAspectRatio: false, // Set to false to define your own height
+   },
+ });
+ 
 
 };
 

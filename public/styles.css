@@ -145,5 +145,27 @@
     /* Styles for the main content components */
   }
   
+  .data-panel {
+    background: #192a45; /* Dark blue background for the card */
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .data-panel h2 {
+    margin: 0;
+    font-size: 1.5rem; /* Adjust the size as needed */
+  }
+  
+  .data-panel .label {
+    color: #a7b1c2; /* Lighter text color for labels */
+    font-size: 1rem;
+  }
+  
   /* Continue with specific styling for other components based on design reference */
   

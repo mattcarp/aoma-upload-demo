@@ -5,62 +5,71 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>File Uploader</title>
-	<link rel="icon" href="favicon.png" type="image/png">
 	<link rel="stylesheet" href="styles.css">
+	<link rel="icon" href="favicon.png" type="image/png">
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<!-- Include this in your HTML head section -->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
-
-
 	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.766.0.min.js"></script>
 </head>
 
 <body>
-	<div class="container">
-		<!-- Drag & Drop Area -->
-		<div id="drag-drop-area" class="card-panel">
+	<div class="uploader-container">
+		<div id="drag-drop-area">
 			<p>Drag files here or click to select</p>
 			<input type="file" id="file-input" hidden />
 		</div>
 
-		<!-- Speed Chart -->
-		<div class="card-panel chart-container">
-			<canvas id="speedChart"></canvas>
+		<!-- File Information Display -->
+		<div id="file-info" class="file-info">
+			<!-- File information will be displayed here -->
 		</div>
 
-		<!-- Chunk Size Selection -->
-		<div class="card-panel">
-			<label for="chunkSizeSlider">Select chunk size (MB):</label>
-			<input type="range" id="chunkSizeSlider" name="chunkSize" min="5" max="50" value="5">
-			<span id="chunkSizeDisplay">5 MB</span>
-		</div>
-
-		<!-- Upload Controls -->
-		<div class="card-panel">
+		<!-- Upload controls -->
+		<div class="upload-controls">
 			<button id="upload-button" disabled>Upload</button>
 			<button id="pause-button" disabled>Pause</button>
 			<button id="resume-button" disabled>Resume</button>
 		</div>
 
-		<!-- Speed Display -->
-		<div class="card-panel">
-			<div id="speedDisplay">326.3078 Mbps</div>
+		<!-- Chunk size controls -->
+		<div class="chunk-size-controls">
+			<label for="chunkSizeSlider">Chunk Size (MB): </label>
+			<input type="range" id="chunkSizeSlider" name="chunkSize" min="1" max="50" value="5" step="1">
+			<span id="chunkSizeDisplay">5 MB</span>
 		</div>
 
-		<!-- Upload Progress -->
-		<div class="card-panel">
-			<h2 id="uploadPercentage">0%</h2>
-			<h2 id="uploadSpeed">0 KB/s</h2>
+		<div class="content-container">
+			<div class="speed-chart-container">
+				<canvas id="speedChart"></canvas>
+			</div>
+
+			<div class="info-cards-container">
+				<!-- Ensure IDs here match those expected in your JavaScript -->
+				<div class="info-card" id="internet-speed-card">
+					<label class="info-label">Internet Speed</label>
+					<div class="info-value" id="internet-speed-value">0 Mbps</div>
+				</div>
+				<div class="info-card" id="percent-complete-card">
+					<label class="info-label">Percent Complete</label>
+					<div class="info-value" id="percent-complete-value">0%</div>
+				</div>
+				<div class="info-card" id="upload-speed-card">
+					<label class="info-label">Upload Speed</label>
+					<div class="info-value" id="uploadSpeed">0 KB/s</div>
+				</div>
+				<div class="info-card" id="total-chunks-card">
+					<label class="info-label">Total Chunks</label>
+					<div class="info-value" id="total-chunks-value">0</div>
+				</div>
+				<div class="info-card" id="uploaded-chunks-card">
+					<label class="info-label">Uploaded Chunks</label>
+					<div class="info-value" id="uploaded-chunks-value">0</div>
+				</div>
+				<div class="info-card" id="failed-chunks-card">
+					<label class="info-label">Failed Chunks</label>
+					<div class="info-value" id="failed-chunks-value">0</div>
+				</div>
+			</div>
 		</div>
-
-		<!-- Chunk Info -->
-		<div id="file-info" class="card-panel"><!-- File information will be displayed here --></div>
-
-		<p>Total Chunks: <span id="totalChunks">0</span></p>
-		<p>Uploaded Chunks: <span id="uploadedChunks">0</span></p>
-		<p>Failed Chunks: <span id="failedChunks">0</span></p>
-	</div>
 	</div>
 
 	<script src="js/upload.js"></script>
