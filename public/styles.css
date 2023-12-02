@@ -83,12 +83,12 @@
   
   /* Chart styles */
   .chart-container {
-    margin-bottom: 20px;
+    height: 200px; /* or any other value that is half the current height */
+    margin: 20px 0; /* Adjust the margin as needed */
   }
   
   #speedChart {
-    height: 200px; /* Fixed height for the chart */
-    width: 100%;
+    height: 100% !important; /* This will make the chart take the full height of its container */
   }
   
   /* Responsive design */
@@ -110,4 +110,40 @@
       width: 100%; /* Full width on smaller screens */
     }
   }
+  
+  /* New styles to match the design reference */
+  :root {
+    --primary-blue: #2c3e50; /* Example primary color */
+    --secondary-blue: #8e44ad; /* Example secondary color */
+    --accent-color: #3498db; /* Example accent color */
+    --light-text: #ecf0f1; /* Light text color for better readability */
+  }
+  
+  .sidebar {
+    background: var(--primary-blue);
+    /* Rest of the sidebar styles */
+  }
+  
+  .main-content {
+    background: var(--secondary-blue);
+    /* Rest of the main content styles */
+  }
+  
+  .nav-menu {
+    /* Styles for the navigation menu */
+  }
+  
+  .nav-menu li {
+    /* Individual navigation item styles */
+  }
+  
+  .nav-icon {
+    /* Styles for the navigation icons */
+  }
+  
+  .chart, .progress-bar, .user-profile, .notification-area {
+    /* Styles for the main content components */
+  }
+  
+  /* Continue with specific styling for other components based on design reference */
   
