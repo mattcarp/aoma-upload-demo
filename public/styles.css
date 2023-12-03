@@ -3,150 +3,240 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  body {
+}
+
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #ffffff;
-    background-color: #131c2f; /* Dark blue background */
+    background-color: #131c2f;
+    /* Dark blue background */
     padding: 20px;
-  }
-  
-  /* Container styles */
-  .container {
+}
+
+/* Container styles */
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 1200px;
     margin: auto;
     padding: 20px;
-  }
-  
-  /* Card styles */
-  .card-panel {
-    background: #192a45; /* Slightly lighter blue for contrast */
+}
+
+/* Content container */
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Uploader container styles */
+.uploader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Upload controls */
+.upload-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Card styles */
+.card-panel {
+    background: #192a45;
+    /* Slightly lighter blue for contrast */
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #ffffff;
     width: 100%;
-    max-width: 960px; /* Adjust based on your layout preference */
-  }
-  
-  /* Drag and drop styles */
-  #drag-drop-area {
-    border: 2px dashed #4a5c6b; /* Darker blue border */
+    max-width: 960px;
+    /* Adjust based on your layout preference */
+}
+
+/* Drag and drop styles */
+#drag-drop-area {
+    border: 2px dashed #4a5c6b;
+    /* Darker blue border */
     border-radius: 10px;
     text-align: center;
     padding: 40px;
     margin-bottom: 20px;
-  }
-  
-  /* Button styles */
-  button {
-    background-color: #4a5c6b; /* Button color */
+}
+
+/* Button styles */
+button {
+    background-color: #4a5c6b;
+    /* Button color */
     color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
-    display: inline-block;
-    width: auto;
-    margin: 0 10px; /* Add space between buttons */
     transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #677a92; /* Button hover state */
-  }
-  
-  /* Adjust the button container to center the buttons */
-  .card-panel button {
+}
+
+button:hover {
+    background-color: #677a92;
+    /* Button hover state */
+}
+
+/* Adjust the button container to center the buttons */
+.card-panel button {
     display: flex;
     justify-content: center;
-  }
-  
-  /* Slider styles */
-  input[type="range"] {
-    width: calc(100% - 60px); /* Adjust width to allow room for label */
-    margin: 10px 0; /* Spacing above and below slider */
-  }
-  
-  /* Label styling to match the reference */
-  input[type="range"] + span {
+}
+
+/* Slider styles */
+input[type="range"] {
+    width: calc(100% - 60px);
+    /* Adjust width to allow room for label */
+    margin: 10px 0;
+    /* Spacing above and below slider */
+}
+
+/* Chunk size controls */
+.chunk-size-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Label styling to match the reference */
+input[type="range"]+span {
     display: inline-block;
     width: auto;
     margin-left: 10px;
-  }
-  
-  /* Chart styles */
-  .chart-container {
-    height: 200px; /* or any other value that is half the current height */
-    margin: 20px 0; /* Adjust the margin as needed */
-  }
-  
-  #speedChart {
-    height: 100% !important; /* This will make the chart take the full height of its container */
-  }
-  
-  /* Responsive design */
-  @media (max-width: 768px) {
+}
+
+/* Chart styles */
+.chart-container {
+    height: 200px;
+    /* or any other value that is half the current height */
+    margin: 20px 0;
+    /* Adjust the margin as needed */
+}
+
+/* Speed chart container */
+.speed-chart-container {
+    flex-grow: 2;
+    margin-right: 20px;
+}
+
+ /* TODO this should be globally changed to speed-chart */
+#speedChart {
+    width: 100%;
+    height: 200px; /* Adjust based on your preference */
+}
+
+/* Info cards container */
+.info-cards-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Info card */
+.info-card {
+    background: #192a45; /* Slightly lighter blue for contrast */
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.info-label {
+    color: #a7b1c2;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+.info-value {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+
+
+
+/* Responsive design */
+@media (max-width: 768px) {
     .container {
-      width: 100%;
-      padding: 10px;
+        width: 100%;
+        padding: 10px;
     }
-  
+
     button {
-      margin-bottom: 10px;
+        margin-bottom: 10px;
     }
-  
+
     .card-panel {
-      margin-bottom: 10px;
+        margin-bottom: 10px;
     }
-  
+
     input[type="range"] {
-      width: 100%; /* Full width on smaller screens */
+        width: 100%;
+        /* Full width on smaller screens */
     }
-  }
-  
-  /* New styles to match the design reference */
-  :root {
-    --primary-blue: #2c3e50; /* Example primary color */
-    --secondary-blue: #8e44ad; /* Example secondary color */
-    --accent-color: #3498db; /* Example accent color */
-    --light-text: #ecf0f1; /* Light text color for better readability */
-  }
-  
-  .sidebar {
+}
+
+/* New styles to match the design reference */
+:root {
+    --primary-blue: #2c3e50;
+    /* Example primary color */
+    --secondary-blue: #8e44ad;
+    /* Example secondary color */
+    --accent-color: #3498db;
+    /* Example accent color */
+    --light-text: #ecf0f1;
+    /* Light text color for better readability */
+}
+
+.sidebar {
     background: var(--primary-blue);
     /* Rest of the sidebar styles */
-  }
-  
-  .main-content {
+}
+
+.main-content {
     background: var(--secondary-blue);
     /* Rest of the main content styles */
-  }
-  
-  .nav-menu {
+}
+
+.nav-menu {
     /* Styles for the navigation menu */
-  }
-  
-  .nav-menu li {
+}
+
+.nav-menu li {
     /* Individual navigation item styles */
-  }
-  
-  .nav-icon {
+}
+
+.nav-icon {
     /* Styles for the navigation icons */
-  }
-  
-  .chart, .progress-bar, .user-profile, .notification-area {
+}
+
+.chart,
+.progress-bar,
+.user-profile,
+.notification-area {
     /* Styles for the main content components */
-  }
-  
-  .data-panel {
-    background: #192a45; /* Dark blue background for the card */
+}
+
+.data-panel {
+    background: #192a45;
+    /* Dark blue background for the card */
     border-radius: 10px;
     padding: 15px;
     margin: 10px 0;
@@ -155,17 +245,46 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  
-  .data-panel h2 {
+}
+
+.data-panel h2 {
     margin: 0;
-    font-size: 1.5rem; /* Adjust the size as needed */
-  }
-  
-  .data-panel .label {
-    color: #a7b1c2; /* Lighter text color for labels */
+    font-size: 1.5rem;
+    /* Adjust the size as needed */
+}
+
+.data-panel .label {
+    color: #a7b1c2;
+    /* Lighter text color for labels */
     font-size: 1rem;
-  }
-  
-  /* Continue with specific styling for other components based on design reference */
-  
+}
+
+/* Adjustments for mobile view */
+@media (max-width: 768px) {
+    .content-container {
+        flex-direction: column;
+    }
+
+    .speed-chart-container {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .info-cards-container {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .chunk-size-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    input[type="range"] {
+        width: 100%;
+    }
+}
