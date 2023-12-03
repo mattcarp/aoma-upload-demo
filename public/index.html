@@ -18,11 +18,6 @@
 			<input type="file" id="file-input" hidden />
 		</div>
 
-		<!-- File Information Display -->
-		<div id="file-info" class="file-info">
-			<!-- File information will be displayed here -->
-		</div>
-
 		<!-- Upload controls -->
 		<div class="upload-controls">
 			<button id="upload-button" disabled>Upload</button>
@@ -43,7 +38,11 @@
 			</div>
 
 			<div class="info-cards-container">
-				<!-- Ensure IDs here match those expected in your JavaScript -->
+				<!-- Info card for the selected file -->
+				<div class="info-card" id="selected-file-card">
+					<label class="info-label">Selected File</label>
+					<div class="info-value" id="selected-file-value">No file chosen</div>
+				</div>
 				<div class="info-card" id="internet-speed-card">
 					<label class="info-label">Internet Speed</label>
 					<div class="info-value" id="internet-speed-value">0 Mbps</div>

@@ -124,10 +124,11 @@ function handleFileSelect(e) {
 }
 
 function displayFileInfo(file) {
+  const selectedFileDisplay = document.getElementById("selected-file-value");
   if (file) {
-    fileInfoDisplay.textContent = `Selected file: ${file.name}`;
+    selectedFileDisplay.textContent = file.name;
   } else {
-    fileInfoDisplay.textContent = "";
+    selectedFileDisplay.textContent = "No file chosen";
   }
 }
 
