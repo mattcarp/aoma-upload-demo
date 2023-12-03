@@ -185,8 +185,8 @@ window.onload = function () {
      labels: [], // No initial labels
      datasets: [{
        label: "Upload Speed (KB/s)",
-       backgroundColor: "rgba(0, 123, 255, 0.2)",
-       borderColor: "rgba(0, 123, 255, 1)",
+       backgroundColor: "rgba(0, 123, 255, 0.2)", // Adjust this color to match the reference
+       borderColor: "rgba(0, 123, 255, 1)", // Adjust this color too if needed
        data: [], // Start with an empty data array
        fill: false,
      }],
