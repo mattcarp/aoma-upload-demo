@@ -140,8 +140,9 @@ function resetUploadDisplay() {
   const uploadPercentage = document.getElementById("percent-complete-value");
   const uploadSpeed = document.getElementById("internet-speed-value");
 
-  uploadPercentage.style.opacity = "0";
-  uploadSpeed.style.opacity = "0";
+  // temp comment while bug fixing
+  // uploadPercentage.style.opacity = "0";
+  // uploadSpeed.style.opacity = "0";
 
   setTimeout(() => {
     uploadPercentage.style.opacity = "1";
@@ -164,49 +165,109 @@ window.onload = function () {
   dragDropArea.addEventListener("drop", handleFileDrop);
   dragDropArea.addEventListener("dragleave", resetDragDropArea);
 
-  fileInfoDisplay = document.getElementById("file-info"); // Make sure this ID exists in your HTML;
+  fileInfoDisplay = document.getElementById("selected-file-value"); // Ensure this ID is correct.
 
   const fileInput = document.getElementById("file-input");
   fileInput.addEventListener("change", handleFileSelect);
 
   const uploadButton = document.getElementById("upload-button");
-  uploadButton.disabled = true;
   uploadButton.addEventListener("click", function () {
-    console.log("Upload button clicked", fileInput.files[0]);
-    uploadFile(fileInput.files[0]);
-    document.getElementById("speedChart").style.display = "block";
+      console.log("Upload button clicked", fileInput.files[0]);
+      uploadFile(fileInput.files[0]);
   });
 
- // Chart Initialization
- var ctx = document.getElementById("speedChart").getContext("2d");
- speedChart = new Chart(ctx, {
-   type: "line",
-   data: {
-     labels: [], // No initial labels
-     datasets: [{
-       label: "Upload Speed (KB/s)",
-       backgroundColor: "rgba(0, 123, 255, 0.2)", // Adjust this color to match the reference
-       borderColor: "rgba(0, 123, 255, 1)", // Adjust this color too if needed
-       data: [], // Start with an empty data array
-       fill: false,
-     }],
-   },
-   options: {
-     scales: {
-       y: {
-         beginAtZero: true,
-       },
-     },
-     legend: {
-       display: true,
-     },
-     responsive: true,
-     maintainAspectRatio: false, // Set to false to define your own height
-   },
- });
- 
+  // Speed Chart Initialization with Static Data
+  const speedCtx = document.getElementById("speedChart").getContext("2d");
+  speedChart = new Chart(speedCtx, {
+      type: 'line',
+      data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Static labels for testing
+          datasets: [{
+              label: 'Upload Speed (KB/s)',
+              data: [12, 19, 3, 5, 2, 3], // Static data for testing
+              backgroundColor: 'rgba(0, 123, 255, 0.2)',
+              borderColor: 'rgba(0, 123, 255, 1)',
+              fill: false,
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true,
+              }
+          },
+          plugins: {
+              legend: {
+                  display: true,
+              }
+          },
+          responsive: true,
+          maintainAspectRatio: false,
+      }
+  });
 
+  // Donut Chart Initializations with Static Data
+  const completionCtx = document.getElementById('completionDonut').getContext('2d');
+  const completionChart = new Chart(completionCtx, {
+      type: 'doughnut',
+      data: {
+          labels: ['Complete', 'Incomplete'], // Example labels
+          datasets: [{
+              data: [70, 30], // Static data for testing
+              backgroundColor: [
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(192, 75, 75, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(192, 75, 75, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+              legend: {
+                  display: true,
+              }
+          }
+      }
+  });
+
+  const speedDonutCtx = document.getElementById('speedDonut').getContext('2d');
+  const speedDonutChart = new Chart(speedDonutCtx, {
+      type: 'doughnut',
+      data: {
+          labels: ['Fast', 'Slow'], // Example labels
+          datasets: [{
+              data: [65, 35], // Static data for testing
+              backgroundColor: [
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+              legend: {
+                  display: true,
+              }
+          }
+      }
+  });
 };
+
+
+
 
 document.getElementById('chunkSizeSlider').addEventListener('input', function() {
   const chunkSize = this.value * 1024 * 1024;

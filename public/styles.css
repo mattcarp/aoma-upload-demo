@@ -6,47 +6,69 @@
 }
 
 body {
-    background-color: #131c2f; /* Darker blue for the main background */
-  }
-  
-  .uploader-container {
-    background-color: #192a45; /* Lighter blue for the upload container */
+    background-color: #131c2f;
+    /* Darker blue for the main background */
+}
+
+.uploader-container {
+    background-color: #192a45;
+    /* Lighter blue for the upload container */
     padding: 20px;
     border-radius: 10px;
-  }
-  
+}
+
 
 
 /* Apply Roboto font for general text */
-body, button, input, textarea {
+body,
+button,
+input,
+textarea {
     font-family: 'Roboto', sans-serif;
-    font-size: 16px; /* Standard font size */
-    color: #ecf0f1; /* Light text color for better readability */
-  }
+    font-size: 16px;
+    /* Standard font size */
+    color: #ecf0f1;
+    /* Light text color for better readability */
+}
 
 /* Text color adjustments */
-h1, h2, h3, h4, h5, h6, .info-value {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.info-value {
     color: var(--text-dark);
 
 }
 
-  /* Style for the info labels to match the reference */
+/* Style for the info labels to match the reference */
 .info-label {
-    font-size: 12px; /* Smaller font size for labels */
-    color: #a7b1c2; /* Lighter text color for labels */
-    text-transform: uppercase; /* All caps for labels */
-    letter-spacing: 1px; /* Spacing for a modern look */
-    margin-bottom: 5px; /* Space between label and value */
-  }
+    font-size: 12px;
+    /* Smaller font size for labels */
+    color: #a7b1c2;
+    /* Lighter text color for labels */
+    text-transform: uppercase;
+    /* All caps for labels */
+    letter-spacing: 1px;
+    /* Spacing for a modern look */
+    margin-bottom: 5px;
+    /* Space between label and value */
+}
 
 
 /* Style for the info values to make them stand out */
 .info-value {
-    font-size: 24px; /* Larger font size for values */
-    color: #ecf0f1; /* Light text color for values */
-    font-weight: 700; /* Bold font weight for values */
-    line-height: 1.2; /* Adjust line height for better readability */
-  }
+    font-size: 24px;
+    /* Larger font size for values */
+    color: #ecf0f1;
+    /* Light text color for values */
+    font-weight: 700;
+    /* Bold font weight for values */
+    line-height: 1.2;
+    /* Adjust line height for better readability */
+}
 
 /* Container styles */
 .container {
@@ -60,21 +82,28 @@ h1, h2, h3, h4, h5, h6, .info-value {
 
 /* Style adjustments for the file input area */
 #drag-drop-area p {
-    cursor: pointer; 
-    font-size: 18px; /* Slightly larger font size for drag-drop instructions */
-    color: #a7b1c2; /* Lighter color for a subtle look */
-    margin-bottom: 20px; /* Space below the text */
-  }
+    cursor: pointer;
+    font-size: 18px;
+    /* Slightly larger font size for drag-drop instructions */
+    color: #a7b1c2;
+    /* Lighter color for a subtle look */
+    margin-bottom: 20px;
+    /* Space below the text */
+}
 
-  /* Style adjustments for buttons to match the reference */
+/* Style adjustments for buttons to match the reference */
 button {
-    font-size: 14px; /* Standard font size for buttons */
-    text-transform: uppercase; /* All caps for button text */
-    letter-spacing: 1px; /* Spacing for a modern look */
-    padding: 12px 20px; /* Slightly larger padding for a better button shape */
-  }
+    font-size: 14px;
+    /* Standard font size for buttons */
+    text-transform: uppercase;
+    /* All caps for button text */
+    letter-spacing: 1px;
+    /* Spacing for a modern look */
+    padding: 12px 20px;
+    /* Slightly larger padding for a better button shape */
+}
 
-  .content-container {
+.content-container {
     display: flex;
     flex-direction: row;
     align-items: start;
@@ -115,7 +144,7 @@ button {
 
 /* Drag and drop styles */
 #drag-drop-area {
-    cursor: pointer; 
+    cursor: pointer;
     border: 2px dashed #4a5c6b;
     width: 600px;
     border-radius: 10px;
@@ -171,15 +200,11 @@ input[type="range"]+span {
 }
 
 /* Chart styles */
-.chart-container {
-    height: 200px;
-    /* or any other value that is half the current height */
-    margin: 20px 0;
-    /* Adjust the margin as needed */
-}
+/* Assuming .chart-container is the speed chart and .donut-charts-container wraps the donut charts */
 
 .speed-chart-container {
-    margin-top: 0; /* Ensure consistent top margin */
+    margin-top: 0;
+    /* Ensure consistent top margin */
     padding-top: 0;
     flex-grow: 2;
     margin-right: 20px;
@@ -189,16 +214,18 @@ input[type="range"]+span {
 }
 
 
- /* TODO this should be globally changed to speed-chart */
+/* TODO this should be globally changed to speed-chart */
 #speedChart {
     width: 100%;
-    height: 200px; /* Adjust based on your preference */
+    height: 200px;
+    /* Adjust based on your preference */
 }
 
 .chart-and-donuts-container {
     display: flex;
     flex-direction: column;
-    flex-grow: 2; /* Allocate space similar to speedChart */
+    flex-grow: 2; /* Allocate space for the container */
+    width: 100%; /* Full width of the content container */
 }
 
 .info-cards-container {
@@ -206,13 +233,15 @@ input[type="range"]+span {
     flex-direction: column;
     flex-grow: 1;
     justify-content: space-evenly;
-    margin-top: 0; /* Ensure consistent top margin */
+    margin-top: 0;
+    /* Ensure consistent top margin */
     padding-top: 0;
 }
 
 /* Info card */
 .info-card {
-    background: #192a45; /* Slightly lighter blue for contrast */
+    background: #192a45;
+    /* Slightly lighter blue for contrast */
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 10px;
@@ -229,9 +258,11 @@ input[type="range"]+span {
 }
 
 .info-value {
-    font-size: 20px; /* Adjust based on your preference */
-    font-weight: 500; /* Lighter font weight */
-  }
+    font-size: 20px;
+    /* Adjust based on your preference */
+    font-weight: 500;
+    /* Lighter font weight */
+}
 
 /* Responsive design */
 @media (max-width: 768px) {
@@ -257,15 +288,21 @@ input[type="range"]+span {
 /* Responsive design adjustments */
 @media (max-width: 768px) {
     /* You can adjust font sizes for mobile here if needed */
-  }
+}
 
-  :root {
-    --primary-color: #131c2f; /* Dark blue for the main background */
-    --secondary-color: #192a45; /* Slightly lighter blue for cards */
-    --accent-color: #3498db; /* Blue accent for interactive elements */
-    --text-light: #ecf0f1; /* Light grey for text */
-    --text-dark: #2c3e50; /* Darker color for headings or important text */
-    --hover-color: #1abc9c; /* A teal-like color for hover states */
+:root {
+    --primary-color: #131c2f;
+    /* Dark blue for the main background */
+    --secondary-color: #192a45;
+    /* Slightly lighter blue for cards */
+    --accent-color: #3498db;
+    /* Blue accent for interactive elements */
+    --text-light: #ecf0f1;
+    /* Light grey for text */
+    --text-dark: #2c3e50;
+    /* Darker color for headings or important text */
+    --hover-color: #1abc9c;
+    /* A teal-like color for hover states */
 }
 
 .sidebar {
@@ -284,6 +321,200 @@ input[type="range"]+span {
     /* Dark blue background for the card */
     border-radius: 10px;
     padding: 15px;
+
+    /* Basic Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #131c2f;
+        /* Darker blue for the main background */
+        font-family: 'Roboto', sans-serif;
+        color: #ecf0f1;
+        /* Light text color for better readability */
+    }
+
+    /* Uploader Container */
+    .uploader-container {
+        background-color: #192a45;
+        /* Lighter blue for the upload container */
+        padding: 20px;
+        border-radius: 10px;
+        width: 600px;
+        /* Width of the speed chart for alignment */
+        margin: 20px auto;
+        /* Center the container */
+    }
+
+    /* Drag-Drop Area */
+    #drag-drop-area {
+        cursor: pointer;
+        border: 2px dashed #4a5c6b;
+        border-radius: 10px;
+        text-align: center;
+        padding: 40px;
+        margin-bottom: 20px;
+    }
+
+    /* Button Styling */
+    button {
+        font-size: 14px;
+        /* Standard font size for buttons */
+        text-transform: uppercase;
+        /* All caps for button text */
+        letter-spacing: 1px;
+        /* Spacing for a modern look */
+        padding: 12px 20px;
+        /* Slightly larger padding for a better button shape */
+        background-color: var(--accent-color);
+        color: var(--text-light);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: var(--hover-color);
+    }
+
+    /* Content Container */
+    .content-container {
+        display: flex;
+        justify-content: space-between;
+        /* Distribute children evenly */
+        align-items: flex-start;
+        /* Align children to the top */
+        margin: auto;
+        /* Centering the container */
+        width: 600px;
+        /* Set the width to match the uploader container */
+    }
+
+    .speed-chart-container {
+        background-color: #007bff;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px; /* Space between chart and donut charts */
+        width: 100%; /* Full width of the container */
+        height: 200px; /* Set an explicit height */
+    }
+
+    #speedChart {
+        height: 200px;
+        /* Fixed height for the chart */
+    }
+
+    .donut-charts-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%; /* Full width of the container */
+        height: 200px; /* Set an explicit height for donut charts */
+    }
+
+    .donut-charts-container canvas {
+        flex: 1;
+        max-width: 200px; /* Maximum width for each canvas */
+        height: auto; /* Maintain aspect ratio */
+        margin: 10px;
+    }
+
+    /* Donut Charts */
+    #completionDonut,
+    #speedDonut {
+        width: calc(50% - 10px);
+        /* Half width minus margin */
+        aspect-ratio: 1;
+        /* Keep it round */
+    }
+
+    .info-cards-container {
+        flex-grow: 1;
+        /* Less space than charts */
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        /* Space between cards */
+    }
+
+    /* Info Card Styling */
+    .info-card {
+        background: #192a45;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 10px;
+        /* Space between cards */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: #ffffff;
+    }
+
+    /* Info Label Styling */
+    .info-label {
+        color: #a7b1c2;
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+    }
+
+    /* Info Value Styling */
+    .info-value {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    /* Responsive Design Adjustments */
+    @media (max-width: 768px) {
+
+        .uploader-container,
+        .content-container {
+            width: 90%;
+            /* Adjust for smaller screens */
+            flex-direction: column;
+            /* Stack vertically */
+            align-items: center;
+            /* Center align */
+            margin: 20px auto;
+            /* Center the container with margin */
+        }
+
+        .speed-chart-container,
+        .donut-charts-container,
+        .info-cards-container {
+            width: 100%;
+            /* Full width on smaller screens */
+            margin-bottom: 20px;
+            /* Space between stacked items */
+        }
+
+        #speedChart,
+        #completionDonut,
+        #speedDonut {
+            width: 100%;
+            /* Full width on smaller screens */
+        }
+
+        .info-card {
+            width: 100%;
+            /* Full width for the cards on mobile */
+        }
+    }
+
+    /* CSS Variables */
+    :root {
+        --primary-color: #131c2f;
+        --secondary-color: #192a45;
+        --accent-color: #3498db;
+        --text-light: #ecf0f1;
+        --text-dark: #2c3e50;
+        --hover-color: #1abc9c;
+    }
+
+    /* Additional Global Styles */
+    /* ... */
+
     margin: 10px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #ffffff;
@@ -313,8 +544,10 @@ input[type="range"]+span {
     }
 
     .speed-chart-container {
-        margin-right: 0;
-        margin-bottom: 20px;
+        flex-grow: 2;
+        /* Give the speed chart more space */
+        margin-right: 20px;
+        /* Space between the speed chart and donut charts */
     }
 
     .info-cards-container {
@@ -337,6 +570,7 @@ input[type="range"]+span {
 }
 
 /* just in case i add them */
-.header, .footer {
+.header,
+.footer {
     background-color: var(--secondary-color);
 }
