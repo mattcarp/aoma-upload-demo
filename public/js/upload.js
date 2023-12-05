@@ -202,7 +202,7 @@ window.onload = function () {
               }
           },
           responsive: true,
-          maintainAspectRatio: false,
+          maintainAspectRatio: true,
       }
   });
 

@@ -105,11 +105,12 @@ button {
 
 .content-container {
     display: flex;
-    flex-direction: row;
-    align-items: start;
-    margin-top: 20px;
-    width: 100%;
-}
+    flex-direction: row; /* Align children in a row */
+    justify-content: space-between; /* Add space between the charts */
+    align-items: flex-start; /* Align items to the start of the container */
+    width: 100%; /* Full width of the container */
+  }
+
 
 .uploader-container {
     display: flex;
@@ -206,7 +207,7 @@ input[type="range"]+span {
     margin-top: 0;
     /* Ensure consistent top margin */
     padding-top: 0;
-    flex-grow: 2;
+    flex-grow: 1;
     margin-right: 20px;
     background-color: #007bff;
     border-radius: 10px;
@@ -223,10 +224,16 @@ input[type="range"]+span {
 
 .chart-and-donuts-container {
     display: flex;
-    flex-direction: column;
-    flex-grow: 2; /* Allocate space for the container */
-    width: 100%; /* Full width of the content container */
+    flex-direction: row;
+    /* Ensures the speed chart and donuts are side by side */
+    align-items: flex-start;
+    /* Aligns them to the top of the container */
+    justify-content: space-between;
+    /* Adds space between the nested containers */
+    width: 100%;
+    /* Takes the full width of its parent */
 }
+
 
 .info-cards-container {
     display: flex;
@@ -382,72 +389,66 @@ input[type="range"]+span {
     }
 
     /* Content Container */
+    /* Content Container */
     .content-container {
         display: flex;
         justify-content: space-between;
-        /* Distribute children evenly */
         align-items: flex-start;
-        /* Align children to the top */
         margin: auto;
-        /* Centering the container */
         width: 600px;
-        /* Set the width to match the uploader container */
     }
 
-    .speed-chart-container {
-        background-color: #007bff;
-        border-radius: 10px;
-        padding: 15px;
-        margin-bottom: 20px; /* Space between chart and donut charts */
-        width: 100%; /* Full width of the container */
-        height: 200px; /* Set an explicit height */
-    }
-
+    /* Adjusting the height of the chart canvas for proper aspect ratio */
     #speedChart {
-        height: 200px;
-        /* Fixed height for the chart */
+        height: auto;
+        aspect-ratio: 2 / 1;
     }
 
     .donut-charts-container {
+        flex: 1;
         display: flex;
         justify-content: space-around;
-        align-items: center;
-        width: 100%; /* Full width of the container */
-        height: 200px; /* Set an explicit height for donut charts */
+        height: 400px;
     }
 
     .donut-charts-container canvas {
-        flex: 1;
-        max-width: 200px; /* Maximum width for each canvas */
-        height: auto; /* Maintain aspect ratio */
+        width: calc(50% - 20px);
+        /* Giving each canvas half of the container's width minus some margin */
+        height: auto;
+        /* Height will be determined by the aspect ratio */
+        aspect-ratio: 1;
+        /* Making the canvas square */
         margin: 10px;
+        /* Spacing between the donut charts */
     }
 
     /* Donut Charts */
     #completionDonut,
     #speedDonut {
-        width: calc(50% - 10px);
-        /* Half width minus margin */
-        aspect-ratio: 1;
-        /* Keep it round */
+        /* width: 400px;
+        height: 400px; */
     }
 
     .info-cards-container {
-        flex-grow: 1;
-        /* Less space than charts */
         display: flex;
         flex-direction: column;
-        gap: 20px;
-        /* Space between cards */
+        align-items: center;
+        /* Center align the info cards */
+        width: 100%;
+        /* Full width to align with the charts above */
+        margin-top: 20px;
+        /* Space between the donuts and info cards */
     }
 
     /* Info Card Styling */
     .info-card {
+        width: 100%;
+        /* Full width to match the container */
+        margin-bottom: 20px;
+        /* Space between each card */
         background: #192a45;
         border-radius: 10px;
         padding: 20px;
-        margin-bottom: 10px;
-        /* Space between cards */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         color: #ffffff;
     }
@@ -483,17 +484,17 @@ input[type="range"]+span {
         .speed-chart-container,
         .donut-charts-container,
         .info-cards-container {
-            width: 100%;
-            /* Full width on smaller screens */
-            margin-bottom: 20px;
-            /* Space between stacked items */
+            width: 90%;
+            /* Smaller width on mobile for some padding on the sides */
+            margin-bottom: 10px;
+            /* Less space between elements on mobile */
         }
 
         #speedChart,
         #completionDonut,
         #speedDonut {
-            width: 100%;
-            /* Full width on smaller screens */
+            aspect-ratio: 1;
+            /* On mobile, make the charts more square to fit better */
         }
 
         .info-card {
@@ -544,11 +545,10 @@ input[type="range"]+span {
     }
 
     .speed-chart-container {
-        flex-grow: 2;
-        /* Give the speed chart more space */
-        margin-right: 20px;
-        /* Space between the speed chart and donut charts */
-    }
+        flex-grow: 1; /* Allows the speed chart to grow and take available space */
+        margin-right: 20px; /* Adds some padding between the chart and the info cards */
+        /* Set a max-width if necessary */
+      }
 
     .info-cards-container {
         width: 100%;
