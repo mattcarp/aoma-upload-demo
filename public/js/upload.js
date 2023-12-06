@@ -1,6 +1,7 @@
 let dragDropArea;
 let fileInfoDisplay;
 let speedChart; // Declare speedChart globally
+let startTime;
 
 async function getSignedUrl(filename, contentType) {
   try {
@@ -39,14 +40,21 @@ fetch("/api/speedtest")
     speedElement.textContent = `${speed.toFixed(4)} Mbps`;
   }
 
-function updateSpeedChart(chart, speed) {
-  const currentTime = new Date().toLocaleTimeString();
-  chart.data.labels.push(currentTime);
-  chart.data.datasets.forEach((dataset) => {
-    dataset.data.push(speed);
-  });
-  chart.update();
-}
+  function updateSpeedChart(chart, speed) {
+    const elapsedTime = new Date().getTime() - startTime;
+    const minutes = Math.floor(elapsedTime / 60000);
+    const seconds = ((elapsedTime % 60000) / 1000).toFixed(0);
+    
+    // Format the elapsed time as mm:ss
+    const timeLabel = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    
+    chart.data.labels.push(timeLabel);
+    chart.data.datasets.forEach((dataset) => {
+      dataset.data.push(speed);
+    });
+    chart.update();
+  }
+  
 
 function calculateSpeed(bytesUploaded, startTime) {
   const duration = (new Date().getTime() - startTime) / 1000;
@@ -61,6 +69,8 @@ async function uploadFile(file) {
     console.error("No signed URL returned.");
     return;
   }
+    // Record the start time when the upload starts
+    startTime = new Date().getTime();
 
   const xhr = new XMLHttpRequest();
   xhr.open("PUT", url, true);
@@ -70,12 +80,18 @@ async function uploadFile(file) {
     if (e.lengthComputable) {
       const percentComplete = (e.loaded / e.total) * 100;
       document.getElementById("percent-complete-value").innerText = percentComplete.toFixed(2) + "%"; // Updated ID
-
+  
+      // Calculate the speed using the calculateSpeed function
       const speed = calculateSpeed(e.loaded, new Date().getTime());
       document.getElementById("internet-speed-value").innerText = speed.toFixed(2) + " KB/s"; // Updated ID
+      
+      // Update the speed chart with the new speed value
+      // This will invoke the function updateSpeedChart passing in the chart instance and the new speed value
       updateSpeedChart(speedChart, speed);
     }
   };
+  
+
 
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -98,19 +114,20 @@ async function uploadFile(file) {
 
   console.log("about to send file");
   xhr.send(file);
-}
+  
 
-function handleDragOver(e) {
-  e.preventDefault();
-  dragDropArea.classList.add("active");
-}
+  function handleDragOver(e) {
+    e.preventDefault();
+    dragDropArea.classList.add("active");
+  }
 
-function handleFileDrop(e) {
-  e.preventDefault();
-  const files = e.dataTransfer.files;
-  displayFileInfo(files[0]);
-  resetDragDropArea();
-}
+  function handleFileDrop(e) {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    displayFileInfo(files[0]);
+    resetDragDropArea();
+  }
+
 
 function resetDragDropArea() {
   dragDropArea.classList.remove("active");
@@ -176,35 +193,36 @@ window.onload = function () {
       uploadFile(fileInput.files[0]);
   });
 
-  // Speed Chart Initialization with Static Data
-  const speedCtx = document.getElementById("speedChart").getContext("2d");
-  speedChart = new Chart(speedCtx, {
-      type: 'line',
-      data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Static labels for testing
-          datasets: [{
-              label: 'Upload Speed (KB/s)',
-              data: [12, 19, 3, 5, 2, 3], // Static data for testing
-              backgroundColor: 'rgba(0, 123, 255, 0.2)',
-              borderColor: 'rgba(0, 123, 255, 1)',
-              fill: false,
-          }]
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true,
-              }
-          },
-          plugins: {
-              legend: {
-                  display: true,
-              }
-          },
-          responsive: true,
-          maintainAspectRatio: true,
+ // Speed Chart Initialization with an Empty Dataset
+const speedCtx = document.getElementById("speedChart").getContext("2d");
+speedChart = new Chart(speedCtx, {
+  type: 'line',
+  data: {
+    labels: [], // Start with an empty array for timestamps
+    datasets: [{
+      label: 'Upload Speed (KB/s)',
+      data: [], // Start with an empty array for speed data
+      backgroundColor: 'rgba(0, 123, 255, 0.2)',
+      borderColor: 'rgba(0, 123, 255, 1)',
+      fill: false,
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
       }
-  });
+    },
+    plugins: {
+      legend: {
+        display: true,
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: true,
+  }
+});
+
 
   // Donut Chart Initializations with Static Data
   const completionCtx = document.getElementById('completionDonut').getContext('2d');
@@ -298,4 +316,5 @@ function continueUploading(file, startIndex) {
       break;
     }
   }
+}
 }
