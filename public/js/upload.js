@@ -137,6 +137,26 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       }
     });
+
+    const ctxSpeed = document.getElementById('speedDonut').getContext('2d');
+const speedDonut = new Chart(ctxSpeed, {
+  type: 'doughnut',
+  data: {
+    labels: ['Speed', 'Unused Speed'],
+    datasets: [{
+      data: [70, 30], // Adjust these values based on the current and maximum speed
+      backgroundColor: ['blue', 'lightgray']
+    }]
+  },
+  options: {
+    plugins: {
+      title: {
+        display: true,
+        text: 'Speed Status'
+      }
+    }
+  }
+});
     
 
   document.getElementById("upload-button").addEventListener("click", function () {
