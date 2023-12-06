@@ -118,26 +118,26 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .catch((error) => console.error("Error fetching the speed:", error));
 
-  // Initialize the doughnut chart
-  const ctx = document.getElementById('completionDonut').getContext('2d');
-  completionDonut = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      datasets: [{
-        data: [0, 100], // Start with 0% complete
-        backgroundColor: ['green', 'lightgray']
-      }]
-    },
-    options: {
-      circumference: Math.PI,
-      rotation: -Math.PI,
-      cutout: '80%',
-      tooltips: { enabled: false },
-      hover: { mode: null },
-      responsive: true,
-      maintainAspectRatio: true,
-    }
-  });
+    const ctx = document.getElementById('completionDonut').getContext('2d');
+    const completionDonut = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Completed', 'Remaining'],
+        datasets: [{
+          data: [0, 100],
+          backgroundColor: ['green', 'lightgray']
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: 'Completion Status'
+          }
+        }
+      }
+    });
+    
 
   document.getElementById("upload-button").addEventListener("click", function () {
     const fileInput = document.getElementById("file-input");

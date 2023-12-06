@@ -55,17 +55,19 @@ body, html {
     width: 80%;
   }
   
-  .chart-and-donuts-container {
-    display: flex;
+/* Adjust the layout of the chart and donuts container */
+.chart-and-donuts-container {
+    flex-direction: column; /* Stack the speed chart and donut charts vertically */
   }
   
-  .speed-chart-container, .donut-charts-container {
-    flex: 1;
+/* Adjust the layout of the speed chart and donut charts containers */
+.speed-chart-container, .donut-charts-container {
+    width: 100%; /* Make the containers take up the full width */
   }
 
   canvas {
-    width: 100%;
-    height: 300px; /* Adjust the height as needed */
+    width: 300px;
+    height: 300px;
   }
   
   .info-cards-container {
