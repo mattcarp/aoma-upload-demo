@@ -1,502 +1,92 @@
-/* Basic Reset */
-* {
+/* General styling */
+body, html {
+    padding-top: 20px; /* This adds space at the top of the page */
+    height: 100%;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #131c2f;
-    /* Darker blue for the main background */
-}
-
-.uploader-container {
-    background-color: #192a45;
-    /* Lighter blue for the upload container */
-    padding: 20px;
-    border-radius: 10px;
-}
-
-
-
-/* Apply Roboto font for general text */
-body,
-button,
-input,
-textarea {
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    /* Standard font size */
-    color: #ecf0f1;
-    /* Light text color for better readability */
-}
-
-/* Text color adjustments */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.info-value {
-    color: var(--text-dark);
-
-}
-
-/* Style for the info labels to match the reference */
-.info-label {
-    font-size: 12px;
-    /* Smaller font size for labels */
-    color: #a7b1c2;
-    /* Lighter text color for labels */
-    text-transform: uppercase;
-    /* All caps for labels */
-    letter-spacing: 1px;
-    /* Spacing for a modern look */
-    margin-bottom: 5px;
-    /* Space between label and value */
-}
-
-
-/* Style for the info values to make them stand out */
-.info-value {
-    font-size: 24px;
-    /* Larger font size for values */
-    color: #ecf0f1;
-    /* Light text color for values */
-    font-weight: 700;
-    /* Bold font weight for values */
-    line-height: 1.2;
-    /* Adjust line height for better readability */
-}
-
-/* Container styles */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-}
-
-/* Style adjustments for the file input area */
-#drag-drop-area p {
-    cursor: pointer;
-    font-size: 18px;
-    /* Slightly larger font size for drag-drop instructions */
-    color: #a7b1c2;
-    /* Lighter color for a subtle look */
-    margin-bottom: 20px;
-    /* Space below the text */
-}
-
-/* Style adjustments for buttons to match the reference */
-button {
-    font-size: 14px;
-    /* Standard font size for buttons */
-    text-transform: uppercase;
-    /* All caps for button text */
-    letter-spacing: 1px;
-    /* Spacing for a modern look */
-    padding: 12px 20px;
-    /* Slightly larger padding for a better button shape */
-}
-
-
-
+  }
+  
+  /* Flexbox container for centering the uploader */
+/* Flexbox container for centering the uploader */
 .uploader-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-}
-
-/* Upload controls */
-.upload-controls {
-    display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-/* Card styles */
-.card-panel {
-    background: #192a45;
-    /* Slightly lighter blue for contrast */
-    border-radius: 10px;
+    margin-top: 20px; /* This adds space at the top of the uploader container */
+    min-height: 100vh; /* Change this line */
+  }
+  
+  #drag-drop-area {
+    border: 2px dashed #cccccc;
     padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #ffffff;
-    width: 100%;
-    max-width: 960px;
-    /* Adjust based on your layout preference */
-}
-
-/* Drag and drop styles */
-#drag-drop-area {
-    cursor: pointer;
-    border: 2px dashed #4a5c6b;
-    width: 600px;
-    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
     text-align: center;
-    padding: 40px;
     margin-bottom: 20px;
-}
-
-/* Button styles */
-button {
-    background-color: var(--accent-color);
-    /* Button color */
-    color: var(--text-light);
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: var(--hover-color);
-}
-
-/* Adjust the button container to center the buttons */
-.card-panel button {
-    display: flex;
-    justify-content: center;
-}
-
-/* Slider styles */
-input[type="range"] {
-    width: calc(100% - 60px);
-    /* Adjust width to allow room for label */
-    margin: 10px 0;
-    /* Spacing above and below slider */
-}
-
-/* Chunk size controls */
-.chunk-size-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-/* Label styling to match the reference */
-input[type="range"]+span {
-    display: inline-block;
-    width: auto;
-    margin-left: 10px;
-}
-
-/* Chart styles */
-/* Assuming .chart-container is the speed chart and .donut-charts-container wraps the donut charts */
-
-.speed-chart-container {
-    flex: 0 0 60%;
-    /* flex-grow, flex-shrink, flex-basis */
-    padding: 15px;
-    box-sizing: border-box;
-    /* Include padding and border in the width */
-}
-
-
-.chart-and-donuts-container {
-    display: flex;
-    flex-direction: row;
-    /* Ensures the speed chart and donuts are side by side */
-    align-items: flex-start;
-    /* Aligns them to the top of the container */
-    justify-content: space-between;
-    /* Adds space between the nested containers */
-    width: 100%;
-    /* Takes the full width of its parent */
-}
-
-
-/* Make the info cards container wider */
-.info-cards-container {
-    flex: 1;
-    /* This will allow the info cards to fill the remaining space */
-    padding: 15px;
-    box-sizing: border-box;
-}
-
-/* Info card */
-.info-card {
-    background: #192a45;
-    /* Slightly lighter blue for contrast */
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #ffffff;
-    width: 100%;
-    /* Cards use the full width available to them */
-    margin-bottom: 20px;
-    /* Space between each card */
-}
-
-.info-label {
-    color: #a7b1c2;
-    font-size: 0.8rem;
-    margin-bottom: 5px;
-}
-
-.info-value {
-    font-size: 20px;
-    /* Adjust based on your preference */
-    font-weight: 500;
-    /* Lighter font weight */
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .container {
-        width: 100%;
-        padding: 10px;
-    }
-
-    button {
-        margin-bottom: 10px;
-    }
-
-    .card-panel {
-        margin-bottom: 10px;
-    }
-
-    input[type="range"] {
-        width: 100%;
-        /* Full width on smaller screens */
-    }
-}
-
-/* Responsive design adjustments */
-@media (max-width: 768px) {
-    /* You can adjust font sizes for mobile here if needed */
-}
-
-:root {
-    --primary-color: #131c2f;
-    /* Dark blue for the main background */
-    --secondary-color: #192a45;
-    /* Slightly lighter blue for cards */
-    --accent-color: #3498db;
-    /* Blue accent for interactive elements */
-    --text-light: #ecf0f1;
-    /* Light grey for text */
-    --text-dark: #2c3e50;
-    /* Darker color for headings or important text */
-    --hover-color: #1abc9c;
-    /* A teal-like color for hover states */
-}
-
-.main-content {
-    background: var(--secondary-color);
-    /* Rest of the main content styles */
-}
-
-
-.data-panel {}
-
-/* Ensuring the main container uses flex to layout its children */
-/* Main container layout */
-.content-container {
-    display: flex;
-    flex-direction: row;
-    /* Lay out children in a row */
-    align-items: flex-start;
-    /* Align children to the start of the container */
-    justify-content: space-between;
-    /* Distribute space between children */
-    width: 100%;
-    /* Full width of the container */
-    gap: 20px;
-    /* Space between children */
-}
-
-/* Adjusting the height of the chart canvas for proper aspect ratio */
-#speedChart {
-    width: 100%;
-    /* The height will be determined by the aspect ratio */
-    aspect-ratio: 2 / 1;
-    /* Maintain a 2:1 aspect ratio */
-}
-
-
-.donut-charts-container {
-    flex: 1;
+  }
+  
+  /* Style for the upload controls */
+  .upload-controls {
     display: flex;
     justify-content: space-around;
-    height: 400px;
-}
-
-.donut-charts-container canvas {
-    width: calc(50% - 20px);
-    /* Giving each canvas half of the container's width minus some margin */
-    height: auto;
-    /* Height will be determined by the aspect ratio */
-    aspect-ratio: 1;
-    /* Making the canvas square */
-    margin: 10px;
-    /* Spacing between the donut charts */
-}
-
-.info-cards-container {
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  /* Style for the chunk size controls */
+  .chunk-size-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+  }
+  
+  #chunkSizeSlider {
+    flex-grow: 1;
+    margin: 0 10px;
+  }
+  
+  .content-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    /* Center align the info cards */
+    width: 80%;
+  }
+  
+  .chart-and-donuts-container {
+    display: flex;
+  }
+  
+  .speed-chart-container, .donut-charts-container {
+    flex: 1;
+  }
+
+  canvas {
     width: 100%;
-    /* Full width to align with the charts above */
-    margin-top: 20px;
-    /* Space between the donuts and info cards */
-}
-
-/* Info Card Styling */
-.info-card {
-    width: 100%;
-    /* Full width to match the container */
-    margin-bottom: 20px;
-    /* Space between each card */
-    background: #192a45;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #ffffff;
-}
-
-/* Info Label Styling */
-.info-label {
-    color: #a7b1c2;
-    font-size: 0.8rem;
-    margin-bottom: 5px;
-}
-
-/* Info Value Styling */
-.info-value {
-    font-size: 20px;
-    font-weight: 500;
-}
-
-/* Responsive Design Adjustments */
-@media (max-width: 768px) {
-
-    .uploader-container,
-    .content-container {
-        width: 90%;
-        /* Adjust for smaller screens */
-        flex-direction: column;
-        /* Stack vertically */
-        align-items: center;
-        /* Center align */
-        margin: 20px auto;
-        /* Center the container with margin */
-    }
-
-    /* Speed chart takes up 2/3 of the space */
-    .speed-chart-container {
-        flex: 2;
-        /* Takes twice as much space as the info cards container */
-        padding: 15px;
-        box-sizing: border-box;
-        /* Include padding in the width calculation */
-    }
-
-    #speedChart,
-    #completionDonut,
-    #speedDonut {
-        aspect-ratio: 1;
-        /* On mobile, make the charts more square to fit better */
-    }
-
+    height: 300px; /* Adjust the height as needed */
+  }
+  
+  .info-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .info-card {
+    border: 1px solid #cccccc;
+    padding: 10px;
+    margin: 5px;
+    width: calc(50% - 10px);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
     .info-card {
-        width: 100%;
-        /* Full width for the cards on mobile */
+      width: 100%;
     }
-}
-
-/* CSS Variables */
-:root {
-    --primary-color: #131c2f;
-    --secondary-color: #192a45;
-    --accent-color: #3498db;
-    --text-light: #ecf0f1;
-    --text-dark: #2c3e50;
-    --hover-color: #1abc9c;
-}
-
-/* Additional Global Styles */
-/* ... */
-
-margin: 10px 0;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-color: #ffffff;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-
-.data-panel h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    /* Adjust the size as needed */
-}
-
-.data-panel .label {
-    color: #a7b1c2;
-    /* Lighter text color for labels */
-    font-size: 1rem;
-}
-
-/* Adjustments for mobile view */
-@media (max-width: 768px) {
-    .content-container {
-        flex-direction: column;
-        align-items: start;
-        width: 100%;
+    .chart-and-donuts-container {
+      flex-direction: column;
     }
-
-    .speed-chart-container {
-        flex-basis: 60%;
-        /* Starts at 60% of the flex container */
-        flex-grow: 0;
-        /* Doesn't allow the chart to grow */
-        flex-shrink: 1;
-        /* Allows the chart to shrink if necessary */
-        /* You can adjust the percentage as needed */
-        padding: 15px;
-        box-sizing: border-box;
-        /* Makes sure padding is included in width */
-    }
-
-    .info-cards-container {
-        flex: 1;
-        /* Takes the remaining space, less than the speed chart */
-        display: flex;
-        flex-direction: column;
-        /* Stack cards vertically */
-        gap: 10px;
-        /* Space between cards */
-        padding: 15px;
-        box-sizing: border-box;
-        /* Include padding in the width calculation */
-    }
-
-    button {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .chunk-size-controls {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    input[type="range"] {
-        width: 100%;
-    }
-}
+  }
