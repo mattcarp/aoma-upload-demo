@@ -96,19 +96,61 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     options: {
       scales: {
+        x: {
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)', // Subtle grid lines on x-axis
+            borderColor: 'transparent' // Hide the x-axis border
+          },
+          ticks: {
+            color: 'rgba(255, 255, 255, 0.7)' // Light color for the x-axis ticks
+          }
+        },
         y: {
-          beginAtZero: true,
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)', // Subtle grid lines on y-axis
+            borderColor: 'transparent' // Hide the y-axis border
+          },
+          ticks: {
+            color: 'rgba(255, 255, 255, 0.7)' // Light color for the y-axis ticks
+          }
         }
       },
       plugins: {
         legend: {
-          display: true,
+          labels: {
+            color: 'rgba(255, 255, 255, 0.7)' // Light color for legend labels
+          }
         }
       },
-      responsive: true,
-      maintainAspectRatio: true,
+      elements: {
+        line: {
+          backgroundColor: 'rgba(0, 0, 0, 0.1)', // Light background color for the line&#8203;``【oaicite:2】``&#8203;
+          borderColor: 'rgba(0, 0, 0, 0.1)', // Light line color&#8203;``【oaicite:1】``&#8203;
+          borderWidth: 2, // or any value that suits your design
+          tension: 0.4, // Adjust the bezier curve tension&#8203;``【oaicite:0】``&#8203;
+          fill: true // Determine if the area under the line should be filled
+  
+        },
+        point: {
+          backgroundColor: '#3498db', // Points color matching line color
+          borderColor: '#3498db',
+          radius: 5 // Point radius
+        }
+      },
+      maintainAspectRatio: false, // To maintain the aspect ratio you set in the canvas style
+      layout: {
+        padding: {
+          left: 10,
+          right: 25,
+          top: 20,
+          bottom: 10
+        }
+      }
     }
   });
+  // Set the background color of the canvas container to match the sampled color
+speedCtx.canvas.style.backgroundColor = `rgb(60, 135, 236)`;
+
 
   // Fetch speed test data
   fetch("/api/speedtest")
@@ -138,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 
-    const ctxSpeed = document.getElementById('speedDonut').getContext('2d');
+const ctxSpeed = document.getElementById('speedDonut').getContext('2d');
 const speedDonut = new Chart(ctxSpeed, {
   type: 'doughnut',
   data: {

@@ -33,10 +33,11 @@
 /* Main container for the dashboard elements */
 .dashboard-container {
     display: flex;
-    justify-content: center; /* Centering the contents */
-    align-items: flex-start;
-    width: 100%;
-}
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+    width: 100%; /* This will make the dashboard take the full width of its container */
+    padding: 20px; /* Add some padding around the content */
+  }
 
 /* Card-like containers with shadow */
 .card {
@@ -172,12 +173,11 @@ html {
     width: 600px; /* Takes up two-thirds of the content area */
   }
 
-/* This will affect the container of the speed chart and donut charts */
+/* Container for the donut charts specifically */
 .donut-charts-container {
-    width: 100%;
-    max-width: 600px; /* Adjust if needed */
-    margin-top: 20px; /* Space between the speed chart and the donut charts */
-}
+    justify-content: space-around; /* This will space the donut charts nicely within the container */
+    flex-wrap: wrap; /* Allows the donut charts to wrap if they don't fit in a single row */
+  }
 
 /* Individual donut chart canvas styles */
 #completionDonut, 
@@ -193,8 +193,8 @@ html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 2; /* Takes up two-thirds of the space */
-}
+    width: 66.66%; /* Allocates two-thirds of the width to the charts */
+  }
 
 /* Container for the donut charts */
 .donut-charts-container {
@@ -222,6 +222,13 @@ html {
     /* Canvas background */
     border-radius: 75px;
     /* Circular look */
+}
+
+
+/* Individual containers for speed chart and donut charts, if needed */
+.speed-chart-container,
+.donut-charts-container {
+  width: 100%; /* Each container takes the full width allocated to it */
 }
 
 /* Info cards container to the right of the charts */
@@ -254,7 +261,7 @@ html {
     color: #ecf0f1;
     /* Light text for visibility */
     width: 100%; /* To make sure they don't exceed the max-width of their container */
-    margin-bottom: 10px; /* Adjust spacing between cards */
+    margin-bottom: 20px; /* Adjust spacing between cards */
   }
 
 
@@ -267,9 +274,9 @@ html {
       max-width: 100%; /* Full width on smaller screens */
     }
   
-    #completionDonut,
-    #speedDonut {
-      max-width: 100%; /* Allows each donut chart to expand fully on smaller screens */
-      margin-bottom: 20px; /* Space between stacked charts */
-    }
+    #completionDonut, #speedDonut {
+        width: 150px; /* Fixed width to maintain aspect ratio */
+        height: 150px; /* Fixed height to maintain aspect ratio */
+        margin: 0 auto; /* Center the donuts within their flex container */
+      }
   }
