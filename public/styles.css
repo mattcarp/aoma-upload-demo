@@ -83,7 +83,7 @@ html {
     height: 100%;
     margin: 0;
     font-family: var(--font-family);
-    background: var(--background-dark);
+    background-color: rgb(19, 21, 42); /* The sampled color for the page background */
     /* Using the dark background variable */
     color: var(--text-light);
     /* Using the light text variable */
@@ -112,6 +112,7 @@ html {
     margin-bottom: 20px;
     transition: background-color 0.3s;
     /* Smooth transitions for interactions */
+    background-color: rgb(35, 39, 78); /* The sampled color */
 }
 
 #drag-drop-area:hover {
@@ -225,7 +226,8 @@ html {
     /* Set a fixed width to maintain the circular shape */
     margin: 0 10px;
     /* Adjust margin as needed */
-    background: #34495e;
+    background: rgb(35, 39, 78); /* The sampled color */
+
     /* Canvas background color */
 }
 
