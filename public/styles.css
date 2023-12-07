@@ -75,10 +75,15 @@ select {
     }
 }
 
+.main-container {
+    margin: 0 100px; /* This will add 20 pixels of margin to the left and right sides */
+  }
+
 
 /* General styling for body and html */
 body,
 html {
+    margin: 0 20px; /* This will add 20 pixels of padding to the left and right sides */
     padding-top: 20px;
     height: 100%;
     margin: 0;
@@ -193,7 +198,6 @@ html {
 #completionDonut, #speedDonut {
     flex: 1; /* Allow the charts to grow equally within their container */
     max-width: 50%; /* Adjust if necessary for side-by-side fit */
-    height: 200; /* Fixed height for the donut charts */
     margin: 0 5px; /* Adjust margin for spacing */
   }
 
