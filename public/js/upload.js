@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
   // Set the background color of the canvas container to match the sampled color
-speedCtx.canvas.style.backgroundColor = `rgb(60, 135, 236)`;
+speedCtx.canvas.parentNode.style.backgroundColor = `rgb(60, 135, 236)`;
 
 
   // Fetch speed test data
