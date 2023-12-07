@@ -1,190 +1,275 @@
-/* Apply the primary color scheme */
 :root {
-    --primary-color: #8e44ad; /* Main purple */
-    --secondary-color: #3498db; /* Complementary blue */
-    --accent-color: #e74c3c; /* Accent color */
-    --background-dark: #da1d43; /* Dark background */
-    --text-light: #ecf0f1; /* Light text */
-    --border-radius: 10px; /* Border radius for cards and buttons */
-  }
-  
-  body, html {
-    background: var(--background-dark);
-    color: var(--text-light);
-  }
-  
-  /* Styling for buttons with gradient */
-  .button {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    color: var(--text-light);
+    --primary-color: #3498db;
+    /* Main color */
+    --secondary-color: #9b59b6;
+    /* Secondary color */
+    --background-dark: #2c3e50;
+    /* Dark background */
+    --text-light: #ecf0f1;
+    /* Light text */
+    --border-radius: 10px;
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --font-family: 'Roboto', sans-serif;
+}
+
+/* Styling for buttons with gradient */
+.button {
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
     border: none;
-    padding: 10px 20px;
     border-radius: var(--border-radius);
+    padding: 10px 20px;
+    color: white;
+    box-shadow: var(--box-shadow);
     cursor: pointer;
-    transition: opacity 0.3s;
-  }
-  
-  .button:hover {
-    opacity: 0.8;
-  }
-  
-  /* Card-like containers with shadow */
-  .card {
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background:
+        /* darker shade of primary or secondary color */
+    ;
+}
+
+/* Main container for the dashboard elements */
+.dashboard-container {
+    display: flex;
+    justify-content: center; /* Centering the contents */
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Card-like containers with shadow */
+.card {
     background: var(--background-dark);
     border-radius: var(--border-radius);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
     margin-bottom: 20px;
-  }
-  
-  /* Consistent spacing for layout */
-  .spacing {
+}
+
+/* Consistent spacing for layout */
+.spacing {
     margin: 20px 0;
-  }
-  
-  /* Enhanced input and select styling */
-  input[type="text"],
-  select {
+}
+
+/* Enhanced input and select styling */
+input[type="text"],
+select {
     border: 1px solid var(--secondary-color);
     padding: 10px;
     margin: 10px 0;
     border-radius: var(--border-radius);
-  }
-  
-  /* Responsive media query adjustments */
-  @media (max-width: 768px) {
+}
+
+/* Responsive media query adjustments */
+@media (max-width: 768px) {
+
     /* Adjustments for smaller screens */
-    .card, .button {
-      width: 100%;
+    .card,
+    .button {
+        width: 100%;
     }
-  }
+}
 
 
-/* General styling */
-body, html {
+/* General styling for body and html */
+body,
+html {
     padding-top: 20px;
     height: 100%;
     margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background: #2c3e50; /* Assuming a dark theme from the reference */
-    color: #ecf0f1; /* Light text for dark backgrounds */
-  }
-  
-  /* Flexbox container for centering the uploader */
-  .uploader-container {
+    font-family: var(--font-family);
+    background: var(--background-dark);
+    /* Using the dark background variable */
+    color: var(--text-light);
+    /* Using the light text variable */
+}
+
+/* Flexbox container for centering the uploader */
+.uploader-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-  }
-  
-  #drag-drop-area {
-    border: 2px dashed #3498db; /* Bright border color from reference */
-    background: rgba(255, 255, 255, 0.1); /* Slight white overlay */
+}
+
+#drag-drop-area {
+    border: 2px dashed #3498db;
+    /* Bright border color from reference */
+    background: rgba(255, 255, 255, 0.1);
+    /* Slight white overlay */
     padding: 20px;
-    width: 80%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 700px;
     text-align: center;
-    border-radius: 10px; /* Rounded corners for modern feel */
+    border-radius: 10px;
+    /* Rounded corners for modern feel */
     margin-bottom: 20px;
-    transition: background-color 0.3s; /* Smooth transitions for interactions */
-  }
-  
-  #drag-drop-area:hover {
-    background: rgba(255, 255, 255, 0.2); /* Lighten on hover */
-  }
-  
-  /* Style for the upload controls - using colors from the reference */
-  .upload-controls {
+    transition: background-color 0.3s;
+    /* Smooth transitions for interactions */
+}
+
+#drag-drop-area:hover {
+    background: rgba(255, 255, 255, 0.2);
+    /* Lighten on hover */
+}
+
+/* Style for the upload controls - using colors from the reference */
+.upload-controls {
     display: flex;
     justify-content: space-around;
     width: 100%;
     max-width: 500px;
     margin-bottom: 20px;
-  }
-  
-  .upload-controls button {
-    background: #3498db; /* Button color from reference */
+}
+
+.upload-controls button {
+    background: #3498db;
+    /* Button color from reference */
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  .upload-controls button:hover {
-    background: #2980b9; /* Darken on hover */
-  }
-  
-  .upload-controls button:disabled {
-    background: #95a5a6; /* Disable color */
+}
+
+.upload-controls button:hover {
+    background: #2980b9;
+    /* Darken on hover */
+}
+
+.upload-controls button:disabled {
+    background: #95a5a6;
+    /* Disable color */
     cursor: not-allowed;
-  }
-  
-  /* Style for the chunk size controls */
-  .chunk-size-controls {
+}
+
+/* Style for the chunk size controls */
+.chunk-size-controls {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     max-width: 500px;
     margin-bottom: 20px;
-  }
-  
-  #chunkSizeSlider {
+}
+
+#chunkSizeSlider {
     flex-grow: 1;
     margin: 0 10px;
+}
+
+
+/* Styles for the individual charts within the containers */
+.speed-chart-container {
+    width: 100%;
+    margin-bottom: 20px; /* Space between the charts */
+}
+
+  #speedChart {
+    width: 600px; /* Takes up two-thirds of the content area */
   }
-  
-  /* Progress and donut charts container */
-  .chart-and-donuts-container {
-    display: flex;
-    flex-direction: row; /* Adjusted for side-by-side layout */
-    justify-content: space-around; /* Even spacing around items */
-    width: 80%;
-    margin-bottom: 20px;
-  }
-  
-  .canvas {
-    width: 150px; /* Adjust size as per design reference */
+
+/* This will affect the container of the speed chart and donut charts */
+.donut-charts-container {
+    width: 100%;
+    max-width: 600px; /* Adjust if needed */
+    margin-top: 20px; /* Space between the speed chart and the donut charts */
+}
+
+/* Individual donut chart canvas styles */
+#completionDonut, 
+#speedDonut {
     height: 150px;
-    background: #34495e; /* Canvas background */
-    border-radius: 75px; /* Circular look */
-  }
-  
-  /* Info cards container */
-  .info-cards-container {
+    width: 150px;
+    margin: 0 10px;
+    background: #34495e;
+}
+
+/* Container for both the speed chart and the donut charts */
+.charts-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 80%; /* Match the width of other elements */
+    flex-direction: column;
+    align-items: center;
+    flex: 2; /* Takes up two-thirds of the space */
+}
+
+/* Container for the donut charts */
+.donut-charts-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 600px; /* Should match the speed chart container to align them */
+    margin-top: 20px; /* Space between the speed chart and the donut charts */
   }
+
+/* Individual donut chart canvas styles */
+#completionDonut, 
+#speedDonut {
+  height: 150px; /* Maintain aspect ratio */
+  width: 150px; /* Set a fixed width to maintain the circular shape */
+  margin: 0 10px; /* Adjust margin as needed */
+  background: #34495e; /* Canvas background color */
+}
+
+.canvas {
+    width: 150px;
+    /* Adjust size as per design reference */
+    height: 150px;
+    background: #34495e;
+    /* Canvas background */
+    border-radius: 75px;
+    /* Circular look */
+}
+
+/* Info cards container to the right of the charts */
+.info-cards-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Takes up one-third of the space */
+    padding-left: 20px; /* Spacing between charts and info cards */
+}
   
-  .info-card {
-    background: #34495e; /* Card background from reference */
-    border: none; /* Remove border for a clean look */
+  /* Styles for the individual charts within the containers */
+.speed-chart-container,
+.donut-charts-container {
+  width: 100%; /* Ensure they take up the full width of their container */
+  margin-bottom: 20px; /* Space between the charts */
+}
+
+.info-card {
+    background: #34495e;
+    /* Card background from reference */
+    border: none;
+    /* Remove border for a clean look */
     padding: 15px;
     margin: 10px;
-    border-radius: 5px; /* Consistency in rounding */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    width: calc(50% - 20px); /* Adjust for margin */
-    color: #ecf0f1; /* Light text for visibility */
+    border-radius: 5px;
+    /* Consistency in rounding */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow for depth */
+    /* Adjust for margin */
+    color: #ecf0f1;
+    /* Light text for visibility */
+    width: 100%; /* To make sure they don't exceed the max-width of their container */
+    margin-bottom: 10px; /* Adjust spacing between cards */
   }
+
+
+
+/* Responsive design for smaller screens */
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .speed-chart-container,
+    .donut-charts-container {
+      max-width: 100%; /* Full width on smaller screens */
+    }
   
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .info-card, .upload-controls, .chunk-size-controls, #drag-drop-area {
-      width: 100%; /* Full width for smaller screens */
-    }
-    .chart-and-donuts-container {
-      flex-direction: column; /* Stack elements on smaller screens */
-    }
-    .canvas {
-      margin: auto; /* Center canvas on smaller screens */
-      width: 80%; /* Adjust for smaller screens */
-      height: auto;
+    #completionDonut,
+    #speedDonut {
+      max-width: 100%; /* Allows each donut chart to expand fully on smaller screens */
+      margin-bottom: 20px; /* Space between stacked charts */
     }
   }
-  

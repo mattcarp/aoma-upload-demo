@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
 	<div class="uploader-container">
 		<div id="drag-drop-area">
 			<p>Drag files here or click to select</p>
@@ -33,49 +34,52 @@
 			<span id="chunkSizeDisplay">5 MB</span>
 		</div>
 
-		<div class="content-container">
-			<div class="chart-and-donuts-container">
-				<div class="speed-chart-container">
-					<canvas id="speedChart"></canvas>
-				</div>
+		<div class="dashboard-container">
+				<div class="charts-container">
+					<div class="speed-chart-container">
+						<canvas id="speedChart"></canvas>
+					</div>
 					<div class="donut-charts-container">
 						<canvas id="completionDonut"></canvas>
 						<canvas id="speedDonut"></canvas>
 					</div>
-			</div>
-			<div class="info-cards-container">
-				<!-- Info card for the selected file -->
-				<div class="info-card" id="selected-file-card">
-					<label class="info-label">Selected File</label>
-					<div class="info-value" id="selected-file-name">No file chosen</div>
 				</div>
-				<div class="info-card" id="internet-speed-card">
-					<label class="info-label">Internet Speed</label>
-					<div class="info-value" id="internet-speed-value">0 Mbps</div>
+
+
+				<div class="info-cards-container">
+					<!-- Info card for the selected file -->
+					<div class="info-card" id="selected-file-card">
+						<label class="info-label">Selected File</label>
+						<div class="info-value" id="selected-file-name">No file chosen</div>
+					</div>
+					<div class="info-card" id="internet-speed-card">
+						<label class="info-label">Internet Speed</label>
+						<div class="info-value" id="internet-speed-value">0 Mbps</div>
+					</div>
+					<div class="info-card" id="percent-complete-card">
+						<label class="info-label">Percent Complete</label>
+						<div class="info-value" id="percent-complete-value">0%</div>
+					</div>
+					<div class="info-card" id="upload-speed-card">
+						<label class="info-label">Upload Speed</label>
+						<div class="info-value" id="uploadSpeed">0 KB/s</div>
+					</div>
+					<div class="info-card" id="total-chunks-card">
+						<label class="info-label">Total Chunks</label>
+						<div class="info-value" id="total-chunks-value">0</div>
+					</div>
+					<div class="info-card" id="uploaded-chunks-card">
+						<label class="info-label">Uploaded Chunks</label>
+						<div class="info-value" id="uploaded-chunks-value">0</div>
+					</div>
+					<div class="info-card" id="failed-chunks-card">
+						<label class="info-label">Failed Chunks</label>
+						<div class="info-value" id="failed-chunks-value">0</div>
+					</div>
 				</div>
-				<div class="info-card" id="percent-complete-card">
-					<label class="info-label">Percent Complete</label>
-					<div class="info-value" id="percent-complete-value">0%</div>
-				</div>
-				<div class="info-card" id="upload-speed-card">
-					<label class="info-label">Upload Speed</label>
-					<div class="info-value" id="uploadSpeed">0 KB/s</div>
-				</div>
-				<div class="info-card" id="total-chunks-card">
-					<label class="info-label">Total Chunks</label>
-					<div class="info-value" id="total-chunks-value">0</div>
-				</div>
-				<div class="info-card" id="uploaded-chunks-card">
-					<label class="info-label">Uploaded Chunks</label>
-					<div class="info-value" id="uploaded-chunks-value">0</div>
-				</div>
-				<div class="info-card" id="failed-chunks-card">
-					<label class="info-label">Failed Chunks</label>
-					<div class="info-value" id="failed-chunks-value">0</div>
-				</div>
-			</div>
 		</div>
 	</div>
+
 	<script src="js/upload.js"></script>
 </body>
 
