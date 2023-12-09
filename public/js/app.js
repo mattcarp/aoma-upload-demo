@@ -36,6 +36,7 @@ const fileInput = document.getElementById("file-input");
 fileInput.addEventListener('change', (event) => {
     selectedFile = event.target.files[0];
     if (selectedFile) {
+        DomUtils.displayFileInfo(selectedFile); // Add this line to update the display
         uploadButton.disabled = false; // Enable the upload button
     }
 });
