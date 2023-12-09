@@ -25,10 +25,9 @@
 }
 
 .button:hover {
-    background:
-        /* darker shade of primary or secondary color */
-    ;
+    background: linear-gradient(45deg, #7d3c98, #2980b9); /* Adjusted colors for darker shade */
 }
+
 
 /* Main container for the dashboard elements */
 .dashboard-container {
@@ -125,8 +124,9 @@ html {
 }
 
 #drag-drop-area:hover {
-    background: rgba(255, 255, 255, 0.2);
     /* Lighten on hover */
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
 }
 
 /* Style for the upload controls - using colors from the reference */
@@ -327,13 +327,16 @@ html {
 
 /* Adjust the container of the donut charts to eliminate extra vertical space */
 .donut-charts-container {
-    align-items: flex-start; /* Align the charts to the top of the container */
+    align-items: flex-start;
+    /* Align the charts to the top of the container */
 }
 
 /* Adjust the layout of the charts container to align with the info cards */
 .charts-container {
-    justify-content: space-between; /* Distribute space above and below the charts */
-    height: 100%; /* Set the container to take full height */
+    justify-content: space-between;
+    /* Distribute space above and below the charts */
+    height: 100%;
+    /* Set the container to take full height */
 }
 
 

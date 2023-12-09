@@ -1,4 +1,6 @@
-// s3UtilityFunctions.js
+import { speedChart, completionDonut, speedDonut } from './chartSetup.js';
+// Other import statements if any...
+
 
 export async function getSignedUrl(filename, contentType) {
   try {
@@ -29,20 +31,21 @@ export function calculateSpeed(bytesUploaded, startTime) {
   return bytesUploaded / duration / 1024;
 }
 
-export function updateSpeedChart(startTime, chart, speed) {
-  const elapsedTime = new Date().getTime() - startTime;
-  const minutes = Math.floor(elapsedTime / 60000);
-  const seconds = ((elapsedTime % 60000) / 1000).toFixed(0);
+export function updateSpeedChart(chart, speed) {
+  console.log('Updating chart with speed:', speed);
+  console.log('Chart instance:', chart);
 
-  // Format the elapsed time as mm:ss
-  const timeLabel = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-
-  chart.data.labels.push(timeLabel);
-  chart.data.datasets.forEach((dataset) => {
-    dataset.data.push(speed);
-  });
-  chart.update();
+  if (chart && chart.data && chart.data.labels) {
+      chart.data.labels.push(new Date().toLocaleTimeString());
+      chart.data.datasets.forEach((dataset) => {
+          dataset.data.push(speed);
+      });
+      chart.update();
+  } else {
+      console.error('Chart or chart data is not properly initialized');
+  }
 }
+
 
 export function displaySpeed(speed) {
   const speedElement = document.getElementById("internet-speed-value"); // Updated ID

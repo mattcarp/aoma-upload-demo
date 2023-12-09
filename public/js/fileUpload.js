@@ -1,10 +1,14 @@
 import {
   getSignedUrl,
   calculateSpeed,
+  updateSpeedChart,
   updateUploadStatus,
 } from "./s3UtilityFunctions.js";
+import { speedChart } from './chartSetup.js';
 
-export function uploadFile(file) {
+
+
+export function uploadFile(file, completionDonut) {
   console.log(`Uploading file: ${file.name}`); // Log the name of the file being uploaded
 
   // Declare startTime at the beginning of the function
@@ -21,25 +25,26 @@ export function uploadFile(file) {
     const xhr = new XMLHttpRequest();
 
     xhr.upload.addEventListener("progress", function (e) {
-      if (e.lengthComputable) {
-        const percentComplete = (e.loaded / e.total) * 100;
-        // Update the doughnut chart
-        console.log("completionDonut:", completionDonut);
-        console.log("completionDonut.data:", completionDonut?.data);
-        console.log(
-          "completionDonut.data.datasets:",
-          completionDonut?.data?.datasets
-        );
-
-        completionDonut.data.datasets[0].data = [
-          percentComplete,
-          100 - percentComplete,
-        ];
-        completionDonut.update();
-        const speed = calculateSpeed(e.loaded, startTime);
-        updateSpeedChart(speedChart, speed);
-      }
+        if (e.lengthComputable) {
+            const percentComplete = (e.loaded / e.total) * 100;
+    
+            // Update the completionDonut chart
+            if (completionDonut && completionDonut.data && completionDonut.data.datasets) {
+                completionDonut.data.datasets[0].data = [percentComplete, 100 - percentComplete];
+                completionDonut.update();
+            }
+    
+            // Calculate and update speedChart
+            const speed = calculateSpeed(e.loaded, startTime);
+            console.log('speedChart before update:', speedChart);
+            if (speedChart) {
+                updateSpeedChart(speedChart, speed);
+            } else {
+                console.error('speedChart is not defined');
+            }
+        }
     });
+    
 
     xhr.addEventListener("load", function () {
       if (xhr.status === 200) {
@@ -58,3 +63,5 @@ export function uploadFile(file) {
     xhr.send(file);
   });
 }
+
+

@@ -1,4 +1,7 @@
 let speedChart;
+let completionDonut;
+let speedDonut;
+
 
 
 // Speed Chart Initialization: The code for initializing the speed chart, which includes the Chart constructor call for speedChart and its configuration. This is found in the DOMContentLoaded event listener.
@@ -9,7 +12,7 @@ let speedChart;
 
 
 export function initSpeedChart() {
-  console.log(document.getElementById('speedChart'));
+//   console.log(document.getElementById('speedChart'));
   const speedCtx = document.getElementById('speedChart').getContext("2d");
   speedChart = new Chart(speedCtx, {
     type: "line",
@@ -172,3 +175,6 @@ export function initSpeedDonut() {
     },
   });
 }
+
+export { speedChart, completionDonut, speedDonut };
+
