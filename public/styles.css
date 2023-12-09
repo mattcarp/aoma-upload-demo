@@ -76,19 +76,22 @@ select {
 }
 
 .main-container {
-    margin: 0 100px; /* This will add 20 pixels of margin to the left and right sides */
-  }
+    margin: 0 100px;
+    /* This will add 20 pixels of margin to the left and right sides */
+}
 
 
 /* General styling for body and html */
 body,
 html {
-    margin: 0 20px; /* This will add 20 pixels of padding to the left and right sides */
+    margin: 0 20px;
+    /* This will add 20 pixels of padding to the left and right sides */
     padding-top: 20px;
     height: 100%;
     margin: 0;
     font-family: var(--font-family);
-    background-color: rgb(19, 21, 42); /* The sampled color for the page background */
+    background-color: rgb(19, 21, 42);
+    /* The sampled color for the page background */
     /* Using the dark background variable */
     color: var(--text-light);
     /* Using the light text variable */
@@ -117,7 +120,8 @@ html {
     margin-bottom: 20px;
     transition: background-color 0.3s;
     /* Smooth transitions for interactions */
-    background-color: rgb(35, 39, 78); /* The sampled color */
+    background-color: rgb(35, 39, 78);
+    /* The sampled color */
 }
 
 #drag-drop-area:hover {
@@ -180,6 +184,8 @@ html {
 }
 
 #speedChart {
+    height: 250px;
+
     width: 600px;
     /* Takes up two-thirds of the content area */
 }
@@ -195,11 +201,15 @@ html {
 }
 
 /* Individual donut chart canvas styles */
-#completionDonut, #speedDonut {
-    flex: 1; /* Allow the charts to grow equally within their container */
-    max-width: 50%; /* Adjust if necessary for side-by-side fit */
-    margin: 0 5px; /* Adjust margin for spacing */
-  }
+#completionDonut,
+#speedDonut {
+    flex: 1;
+    /* Allow the charts to grow equally within their container */
+    max-width: 50%;
+    /* Adjust if necessary for side-by-side fit */
+    margin: 0 5px;
+    /* Adjust margin for spacing */
+}
 
 /* Container for both the speed chart and the donut charts */
 .charts-container {
@@ -230,7 +240,8 @@ html {
     /* Set a fixed width to maintain the circular shape */
     margin: 0 10px;
     /* Adjust margin as needed */
-    background: rgb(35, 39, 78); /* The sampled color */
+    background: rgb(35, 39, 78);
+    /* The sampled color */
 
     /* Canvas background color */
 }
@@ -272,12 +283,21 @@ html {
     /* Space between the charts */
 }
 
+/* Target only the first info-card, so it lines up with the speed chart */
+.info-cards-container .info-card:first-child {
+    margin-top: 0;
+    /* Removes the top margin from the first info-card */
+}
+
 .info-card {
-    background-color: rgb(35, 39, 78); /* The sampled color */
+    background-color: rgb(35, 39, 78);
+    /* The sampled color */
     /* Card background from reference */
     border: none;
     /* Remove border for a clean look */
     padding: 15px;
+    /* This sets all padding to 15px */
+    /* This overrides the top padding only */
     margin: 10px;
     border-radius: 5px;
     /* Consistency in rounding */
@@ -292,6 +312,29 @@ html {
     /* Adjust spacing between cards */
 }
 
+.info-card .info-label {
+    text-transform: uppercase;
+    font-size: 12px;
+    /* This will change the text to all caps */
+    margin-bottom: 10px;
+    /* This adds space below the header */
+}
+
+.info-card .info-value {
+    margin-top: 8px;
+    /* This adds space above the text */
+}
+
+/* Adjust the container of the donut charts to eliminate extra vertical space */
+.donut-charts-container {
+    align-items: flex-start; /* Align the charts to the top of the container */
+}
+
+/* Adjust the layout of the charts container to align with the info cards */
+.charts-container {
+    justify-content: space-between; /* Distribute space above and below the charts */
+    height: 100%; /* Set the container to take full height */
+}
 
 
 /* Responsive design for smaller screens */
@@ -304,14 +347,21 @@ html {
         /* Full width on smaller screens */
     }
 
+    /* Individual donut chart canvas styles */
     #completionDonut,
     #speedDonut {
-        background-color: rgb(35, 39, 78); /* The sampled color */
-        width: 150px;
-        /* Fixed width to maintain aspect ratio */
-        height: 150px;
-        /* Fixed height to maintain aspect ratio */
+        /* Doesn't work: delete if you find another solution */
+        max-height: 150px !important;
+
+        /* Set a maximum height to limit the chart size */
+        width: auto;
+        /* Adjust the width automatically based on the height to maintain aspect ratio */
+        /* aspect-ratio: 1 / 1; */
+        /* Ensure the width and height are always equal */
         margin: 0 auto;
-        /* Center the donuts within their flex container */
+        /* Center the chart horizontally */
+        background: rgb(35, 39, 78);
+        /* Use the color you want for the background */
     }
+
 }
