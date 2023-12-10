@@ -34,12 +34,15 @@ dropArea.addEventListener("click", DomUtils.triggerFileSelect);
 
 const fileInput = document.getElementById("file-input");
 fileInput.addEventListener('change', (event) => {
+    console.log("change listener on file-input called. File selected:", event.target.files[0]);
+    DomUtils.resetUploadDisplay(); // Reset the upload display here
     selectedFile = event.target.files[0];
     if (selectedFile) {
-        DomUtils.displayFileInfo(selectedFile); // Add this line to update the display
+        DomUtils.displayFileInfo(selectedFile); // Update the display with file info
         uploadButton.disabled = false; // Enable the upload button
     }
 });
+
 
 // Add more listeners as needed
 
