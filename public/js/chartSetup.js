@@ -20,7 +20,7 @@ export function initSpeedChart() {
       labels: [], // Start with an empty array for timestamps
       datasets: [
         {
-          label: "Upload Speed (KB/s)",
+          label: "Upload Speed (MB/s)",
           data: [], // Start with an empty array for speed data
           backgroundColor: "rgba(0, 123, 255, 0.2)",
           borderColor: "rgba(0, 123, 255, 1)",

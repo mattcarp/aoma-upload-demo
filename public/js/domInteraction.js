@@ -11,6 +11,7 @@
 import { speedChart, completionDonut, speedDonut } from './chartSetup.js';
 
 
+
 export function handleDragOver(e) {
   e.preventDefault();
   e.stopPropagation();
@@ -41,7 +42,7 @@ export function resetDragDropArea() {
 export function displayFileInfo(file) {
   console.log("displayFileInfo is being called");
   const fileInfoDisplay = document.getElementById("selected-file-name"); // Ensure this ID matches your HTML element's ID
-  fileInfoDisplay.textContent = `Selected file: ${file.name}, ${file.size} bytes`;
+  fileInfoDisplay.textContent = `${file.name}, ${file.size} bytes`;
   console.log(`File selected: ${file.name}, ${file.size} bytes`); // Log the selected file info
 
   // Enable the upload button
@@ -65,6 +66,8 @@ export function triggerFileSelect() {
 
 export function resetUploadDisplay() {
     document.getElementById("percent-complete-value").textContent = "0%";
+     // Reset the upload speed info-card
+    updateUploadSpeed(0);
     console.log("resetUploadDisplay is being called");
     if (typeof speedChart !== 'undefined' && speedChart !== null) {
         speedChart.data.labels = [];
@@ -76,5 +79,11 @@ export function resetUploadDisplay() {
         console.error('speedChart is not defined or not initialized');
     }
 }
+
+export function updateUploadSpeed(speed) {
+    const uploadSpeedElement = document.getElementById('uploadSpeed');
+    uploadSpeedElement.textContent = `${speed} KB/s`;
+  }
+  
 
 

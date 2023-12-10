@@ -5,7 +5,7 @@ import {
   updateUploadStatus,
 } from "./s3UtilityFunctions.js";
 import { speedChart } from "./chartSetup.js";
-import * as DomUtils from './domInteraction.js';
+import * as DomUtils from "./domInteraction.js";
 
 export function uploadFile(file, completionDonut) {
   DomUtils.resetUploadDisplay(); // Reset the upload display here
@@ -50,19 +50,20 @@ export function uploadFile(file, completionDonut) {
         if (speedChart) {
           updateSpeedChart(speedChart, speed);
         }
+        // Update the upload speed inf-card
+        DomUtils.updateUploadSpeed(speed);
       }
     });
 
     xhr.addEventListener("load", function () {
-        if (xhr.status === 200) {
-          console.log("Upload complete!");
-          const uploadButton = document.getElementById("upload-button"); // Get the upload button
-          uploadButton.disabled = true; // Disable the upload button
-        } else {
-          console.error(`Upload failed: ${xhr.status} ${xhr.statusText}`);
-        }
-      });
-      
+      if (xhr.status === 200) {
+        console.log("Upload complete!");
+        const uploadButton = document.getElementById("upload-button"); // Get the upload button
+        uploadButton.disabled = true; // Disable the upload button
+      } else {
+        console.error(`Upload failed: ${xhr.status} ${xhr.statusText}`);
+      }
+    });
 
     xhr.addEventListener("error", function () {
       console.error(`Upload failed: ${xhr.status} ${xhr.statusText}`);
