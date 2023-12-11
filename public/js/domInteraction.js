@@ -8,6 +8,19 @@ export function handleDragOver(e) {
   }
 }
 
+export function updateUploadSpeed(speed) {
+  const uploadSpeedElement = document.getElementById('uploadSpeed'); // Adjust with your actual ID
+  const speedInKbps = (speed * 1024).toFixed(2);
+  uploadSpeedElement.textContent = `${speedInKbps} KB/s`;
+}
+
+export function updateElapsedTime(totalTime) {
+  const totalUploadTimeElement = document.getElementById('total-upload-time'); // Adjust with your actual ID
+  const totalTimeInSeconds = (totalTime / 1000).toFixed(2);
+  totalUploadTimeElement.textContent = `Total time: ${totalTimeInSeconds} seconds`;
+}
+
+
 export function handleFileDrop(e) {
   e.preventDefault();
   e.stopPropagation();
@@ -78,6 +91,15 @@ export function updateUploadProgress(partNumber, totalParts) {
   }
 }
 
+export function updateTotalChunks(total) {
+  const totalChunksElement = document.getElementById("total-chunks-value"); // Adjust ID if necessary
+  if (totalChunksElement) {
+    totalChunksElement.textContent = `Total chunks: ${total}`;
+  }
+}
+
+
+
 
 export function showUploadComplete(completionData) {
   console.log('Upload Completed:', completionData);
@@ -103,11 +125,6 @@ export function showUploadError(error) {
   }
 }
 
-// export function updateUploadSpeed(speed) {
-//   const uploadSpeedElement = document.getElementById("uploadSpeed");
-//   uploadSpeedElement.textContent = `${speed} KB/s`;
-// }
-
 export function updatePercentComplete(percentage) {
   const percentCompleteElement = document.getElementById("percent-complete-value");
   if (percentCompleteElement) {
@@ -115,12 +132,12 @@ export function updatePercentComplete(percentage) {
   }
 }
 
-export function updateUploadSpeed(speed) {
-  const uploadSpeedElement = document.getElementById("uploadSpeed");
-  if (uploadSpeedElement) {
-      uploadSpeedElement.textContent = `${speed} KB/s`;
-  }
-}
+// export function updateUploadSpeed(speed) {
+//   const uploadSpeedElement = document.getElementById("uploadSpeed");
+//   if (uploadSpeedElement) {
+//       uploadSpeedElement.textContent = `${speed} KB/s`;
+//   }
+// }
 
 export function updateUploadedChunks(chunksUploaded) {
   const uploadedChunksElement = document.getElementById("uploaded-chunks-value");

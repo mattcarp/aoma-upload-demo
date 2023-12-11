@@ -15,6 +15,10 @@
 <body>
 	<div class="main-container">
 		<div class="uploader-container">
+			<header class="app-header">
+				AOMA Upload Test Harness
+			</header>
+
 			<div class="error-cards-container">
 				<!-- Info card for the selected file -->
 				<div class="error-card" id="error-card">
@@ -40,15 +44,25 @@
 			<!-- Upload controls -->
 			<div class="upload-controls">
 				<button id="upload-button" disabled>Upload</button>
-				<button id="pause-button" disabled>Pause</button>
-				<button id="resume-button" disabled>Resume</button>
+				<!-- Replace the two separate buttons with this single button -->
+				<button id="pause-resume-btn" class="button" disabled>Pause</button>
 			</div>
 
-			<!-- Chunk size controls -->
-			<div class="chunk-size-controls">
-				<label for="chunkSizeSlider">Chunk Size (MB): </label>
-				<input type="range" id="chunkSizeSlider" name="chunkSize" min="1" max="50" value="5" step="1">
-				<span id="chunkSizeDisplay">5 MB</span>
+			<div class="slider-container">
+
+				<!-- Chunk size controls -->
+				<div class="chunk-size-controls">
+					<label for="chunkSizeSlider">Chunk Size (MB): </label>
+					<input type="range" id="chunkSizeSlider" name="chunkSize" min="1" max="50" value="5" step="1">
+					<span id="chunkSizeDisplay">5 MB</span>
+				</div>
+			</div>
+
+			<!-- batch size controls -->
+			<div class="batch-size-controls">
+				<label for="chunkSizeSlider">Batch Size (MB): </label>
+				<input type="range" id="batchSizeSlider" name="batchSize" min="1" max="50" value="5" step="1">
+				<span id="batchSizeDisplay">20 MB</span>
 			</div>
 
 			<div class="dashboard-container">
@@ -93,6 +107,10 @@
 					<div class="info-card" id="failed-chunks-card">
 						<label class="info-label">Failed Chunks</label>
 						<div class="info-value" id="failed-chunks-value">0</div>
+					</div>
+					<div class="info-card" id="upload-time-chunks-card">
+						<label class="info-label">Total Upload Time</label>
+						<div class="info-value" id="total-upload-time">-</div>
 					</div>
 				</div>
 			</div>

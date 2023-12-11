@@ -12,21 +12,56 @@
     --font-family: 'Roboto', sans-serif;
 }
 
+.app-header {
+    font-size: 32px; /* Large font size */
+    font-weight: 300; /* Thin, modern look */
+    text-align: left; /* Left aligned text */
+    color: #ffffff; /* Assuming a light text color; change as needed */
+    padding: 10px 20px; /* Adjust the padding as needed */
+    margin-bottom: 20px; /* Space after the header */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Modern font-family */
+  }
+  
+
 /* Styling for buttons with gradient */
-.button {
-    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+button {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: var(--text-light);
     border: none;
-    border-radius: var(--border-radius);
+    border-radius: 20px;
     padding: 10px 20px;
-    color: white;
+    font-weight: bold;
     box-shadow: var(--box-shadow);
-    cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.button:hover {
-    background: linear-gradient(45deg, #7d3c98, #2980b9); /* Adjusted colors for darker shade */
+button:hover {
+    background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+    transform: scale(1.05);
 }
+
+/* Container for both sliders */
+.slider-container {
+    display: flex;
+    justify-content: space-between; /* This will space out the sliders equally */
+    align-items: center; /* This will vertically align the sliders in the middle */
+    margin-bottom: 20px; /* Adjust as needed for spacing */
+}
+
+/* Individual slider controls */
+.chunk-size-controls, .batch-size-controls {
+    flex: 1; /* This will make each slider take up equal space */
+    margin-right: 10px; /* Adjust as needed for spacing between sliders */
+}
+
+/* You may also want to style the label and input range to make sure they align well */
+.slider-container label,
+.slider-container input[type="range"] {
+    display: block; /* Makes label and slider take the full width of their container */
+    margin-bottom: 5px; /* Adjust as needed for spacing */
+}
+
+
 
 
 /* Main container for the dashboard elements */
