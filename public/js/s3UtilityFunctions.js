@@ -67,6 +67,27 @@ export async function fetchAndDisplaySpeed() {
     console.error("Error fetching internet speed:", error);
   }
 }
+
+export async function getSignedUrlForChunk(fileName, partNumber, uploadId) {
+  try {
+      const response = await fetch('/get-signed-url-for-chunk', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ fileName, partNumber, uploadId })
+      });
+      if (!response.ok) {
+          throw new Error('Failed to obtain signed URL for chunk');
+      }
+      const data = await response.json();
+      return data.signedUrl;
+  } catch (error) {
+      console.error('Error in getSignedUrlForChunk:', error);
+      throw error; // Re-throw the error for handling in the calling function
+  }
+}
+
 // Other functions would follow similar patterns.
 // x getSignedUrl: A function to get a signed URL for AWS S3 uploads.
 // x updateSpeedChart: A function to update a speed chart with new data.

@@ -1,16 +1,4 @@
-// x handleDragOver: Handles the drag-over event on the drag-drop area.
-// x handleFileDrop: Handles the file drop event, including removing the drag-drop area's
-//'dragging' class and handling the dropped files.
-// x resetDragDropArea: Resets the drag-drop area by removing the 'dragging' class.
-// x handleFileSelect: Handles file selection from the file input.
-// x displayFileInfo: Displays information about the selected file.
-// x triggerFileSelect: Triggers the file selection dialog.
-// x resetUploadDisplay: Resets the display elements related to the upload process,
-// including the percent-complete value and the speed chart data.
-
-import { speedChart, completionDonut, speedDonut } from './chartSetup.js';
-
-
+import { speedChart, completionDonut, speedDonut } from "./chartSetup.js";
 
 export function handleDragOver(e) {
   e.preventDefault();
@@ -65,25 +53,81 @@ export function triggerFileSelect() {
 }
 
 export function resetUploadDisplay() {
-    document.getElementById("percent-complete-value").textContent = "0%";
-     // Reset the upload speed info-card
-    updateUploadSpeed(0);
-    console.log("resetUploadDisplay is being called");
-    if (typeof speedChart !== 'undefined' && speedChart !== null) {
-        speedChart.data.labels = [];
-        speedChart.data.datasets.forEach((dataset) => {
-            dataset.data = [];
-        });
-        speedChart.update();
-    } else {
-        console.error('speedChart is not defined or not initialized');
-    }
+  document.getElementById("percent-complete-value").textContent = "0%";
+  // Reset the upload speed info-card
+  updateUploadSpeed(0);
+  console.log("resetUploadDisplay is being called");
+  if (typeof speedChart !== "undefined" && speedChart !== null) {
+    speedChart.data.labels = [];
+    speedChart.data.datasets.forEach((dataset) => {
+      dataset.data = [];
+    });
+    speedChart.update();
+  } else {
+    console.error("speedChart is not defined or not initialized");
+  }
+}
+
+// Update the upload progress in the UI
+export function updateUploadProgress(partNumber, totalParts) {
+  // Assuming you have a progress display element in your HTML
+  const progressElement = document.getElementById("uploaded-chunks-value");
+  if (progressElement) {
+    progressElement.textContent = `Uploading part ${partNumber} of ${totalParts}`;
+    // You can also update a visual progress bar here, if you have one
+  }
+}
+
+
+export function showUploadComplete(completionData) {
+  console.log('Upload Completed:', completionData);
+  // Assuming you have a completion display element in your HTML
+  const completionElement = document.getElementById("upload-complete-text");
+  if (completionElement) {
+      completionElement.textContent = "Upload completed successfully!";
+      completionElement.style.display = "block"; // Make the completion element visible
+  }
+  // Optionally, you can also reset the progress display or navigate the user to another page
+  // resetUploadDisplay(); // Call this if you want to reset the upload progress UI
+}
+
+
+// Show an upload error in the UI
+export function showUploadError(error) {
+  console.error("Upload Error:", error);
+  // Assuming you have an error display element in your HTML
+  const errorElement = document.getElementById("error-text");
+  if (errorElement) {
+    errorElement.textContent = `Error: ${error.message}`;
+    errorElement.style.display = "block"; // Make the error element visible
+  }
+}
+
+// export function updateUploadSpeed(speed) {
+//   const uploadSpeedElement = document.getElementById("uploadSpeed");
+//   uploadSpeedElement.textContent = `${speed} KB/s`;
+// }
+
+export function updatePercentComplete(percentage) {
+  const percentCompleteElement = document.getElementById("percent-complete-value");
+  if (percentCompleteElement) {
+      percentCompleteElement.textContent = `${percentage}%`;
+  }
 }
 
 export function updateUploadSpeed(speed) {
-    const uploadSpeedElement = document.getElementById('uploadSpeed');
-    uploadSpeedElement.textContent = `${speed} KB/s`;
+  const uploadSpeedElement = document.getElementById("uploadSpeed");
+  if (uploadSpeedElement) {
+      uploadSpeedElement.textContent = `${speed} KB/s`;
   }
-  
+}
+
+export function updateUploadedChunks(chunksUploaded) {
+  const uploadedChunksElement = document.getElementById("uploaded-chunks-value");
+  if (uploadedChunksElement) {
+      uploadedChunksElement.textContent = chunksUploaded;
+  }
+}
+
 
 
